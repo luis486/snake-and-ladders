@@ -1,4 +1,5 @@
 package ui;
+import model.*;
 
 import java.util.Scanner;
 
@@ -15,9 +16,26 @@ public class Menu {
         System.out.println("(3) Deseo salir");
     }
 
+    public void createGame() {
+
+        //
+        /*
+        
+        System.out.println("Indique los parametros del juego: ");
+        String parametros = sc.nextLine();
+        String[] arrOfStr = parametros.split(" ", 6);
+        for (int i = 0; i < arrOfStr.length; i++) {
+            System.out.println(arrOfStr[i]);
+        }
+        */
+        
+        return;
+    }
+
     public void doOperation(int option) {
         switch (option) {
         case 1:
+            World.generate(10, 10);
             ;
             break;
 
