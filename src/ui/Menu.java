@@ -10,11 +10,9 @@ public class Menu {
     public void showMenu() {
         System.out.println("Bienvenido a su menu de confianza");
         System.out.println("Por favor digite una opcion");
-        System.out.println("(1) Ingresar un numero por izquierda");
-        System.out.println("(2) Ingresar un numero por derecha");
-        System.out.println("(3) Mostrar como va la lista enlazada");
-        System.out.println("(4) Mostrar mediana actual");
-        System.out.println("(5) Salir");
+        System.out.println("(1) Quiero jugar Snake and Ladders!");
+        System.out.println("(2) Deseo ver el tablero de posiciones");
+        System.out.println("(3) Deseo salir");
     }
 
     public void doOperation(int option) {
@@ -27,15 +25,8 @@ public class Menu {
             ;
             break;
         case 3:
-            ;
-            break;
-        case 4:
-            ;
-            break;
-        case 5:
             System.out.println("Gracias por usar esta aplicacion!");
             break;
-
         default:
             System.out.println("Error, opcion invalida, por favor digite otra opcion");
         }
@@ -55,7 +46,7 @@ public class Menu {
             showMenu();
             option = readOption();
             doOperation(option);
-        } while (option != 5);
+        } while (option != 3);
     }
     
 }
