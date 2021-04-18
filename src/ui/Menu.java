@@ -1,11 +1,13 @@
 package ui;
-import model.*;
 
 import java.util.Scanner;
+
+import model.World;
 
 public class Menu {
 
     Scanner sc = new Scanner(System.in);
+    
  
 
     public void showMenu() {
@@ -35,22 +37,17 @@ public class Menu {
     public void doOperation(int option) {
         switch (option) {
         case 1:
-            World.generate(10, 10);
-            ;
+        World world = new World(5, 5); ;
+        System.out.println(world);
             break;
 
         case 2:
             ;
             break;
-        case 3:
-            System.out.println("Gracias por usar esta aplicacion!");
-            break;
         default:
             System.out.println("Error, opcion invalida, por favor digite otra opcion");
         }
     }
-
-
 
     public int readOption() {
         int option = sc.nextInt();
@@ -59,12 +56,16 @@ public class Menu {
     }
 
     public void startProgram() {
-        int option;
-        do {
-            showMenu();
-            option = readOption();
+        showMenu();
+        int option = readOption();
+
+        if (option == 3){
+            System.out.println("Gracias por usar esta aplicacion");
+        }else{
             doOperation(option);
-        } while (option != 3);
+            startProgram();
+        }
+      
     }
     
 }

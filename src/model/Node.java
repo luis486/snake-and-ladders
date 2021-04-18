@@ -2,46 +2,63 @@ package model;
 
 public class Node {
 
-    public Node top;
-    public Node bottom;
-    public Node left;
-    public Node right;
+    private Node top;
+    private Node bottom;
+    private Node left;
+    private Node right;
     
-
-    public int x;
-    public int y;
+    public int row;
+    public int col;
 
     public String data;
 
-    public Node(int x, int y, String data) {
-        this.x = x;
-        this.y = y;
-        this.data = data;
+    public Node(int r, int c) {
+        this.row = r;
+        this.col = c;
+    }
+
+    public int getRow() {
+        return this.row;
+    }
+
+    public int getCol() {
+        return this.col;
     }
 
     public Node getTop() {
         return this.top;
     }
 
+    public void setTop(Node top) {
+        this.top = top;
+    }
+
     public Node getBottom() {
         return this.bottom;
+    }
+
+    public void setBottom(Node bottom) {
+        this.bottom = bottom;
     }
 
     public Node getLeft() {
         return this.left;
     }
+
+    public void setLeft(Node left) {
+        this.left = left;
+    }
+
     public Node getRight() {
         return this.right;
     }
 
-    public boolean equals(Node obj) {
-        if (obj == null ) {
-            return true;
-        }
-        if (this.x == obj.x && this.y == obj.y) {
-            return true;
-        }
-        return false;
+    public void setRight(Node right) {
+        this.right = right;
     }
-    
+
+    public String toString(){
+        return "[("+row+","+col+")]";
+    }
+  
 }
