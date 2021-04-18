@@ -23,7 +23,6 @@ public class World {
             firstDownRow.setTop(firstRow);
             firstRow.setBottom(firstDownRow);
             createRow(i+1, j, firstDownRow);
-
         }
     }
     
