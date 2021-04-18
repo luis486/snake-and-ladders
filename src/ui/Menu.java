@@ -8,7 +8,8 @@ public class Menu {
 
     Scanner sc = new Scanner(System.in);
     
-    private static final String SPACE = "";
+    private static final String SPACE =" ";
+    private World world;
 
     public void showMenu() {
         System.out.println("Bienvenido a su menu de confianza");
@@ -23,21 +24,14 @@ public class Menu {
         System.out.println("En una misma línea separado con espacios pondra el numero de filas, de columnas,"
         + "cantidad de serpientes, cantidad de escaleras y por ultimo sin espacios, los simbolos de los jugadores (respectivamente)");
         String parametros = sc.nextLine();
-       whatEver(parametros);  
+        createWorld(parametros);  
         return;
     }
 
-    public void whatEver(String parametros){
-        int n = 0;
-        int m = 0;
-        String[] parts = parametros.split(SPACE);
-        for (int i = 0; i < parts.length; i++) {
-            System.out.println(parts[i]);
-            n = Integer.parseInt(parts[1]);
-            m = Integer.parseInt(parts[2]);
 
-        }
-        World world = new World(n,m);
+    public void createWorld(String parametros){
+        String[] parts = parametros.split(SPACE);
+        world = new World(Integer.parseInt(parts[0]),Integer.parseInt(parts[1]));
         System.out.println(world);
     }
 
@@ -45,7 +39,6 @@ public class Menu {
         switch (option) {
         case 1:
         createGame();
-       
             break;
 
         case 2:

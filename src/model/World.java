@@ -66,6 +66,30 @@ public class World {
 
         return msg;
     }
+
+    public void generateSnakes(int n, int m, int snakes){
+        
+        if( snakes > (n*m)/5  ){
+            return;
+        }else{
+
+        }
+    }
+
+    public void generateLadders(int n, int m, int ladders){
+        if( ladders > (n*m)/4  ){
+            return;
+        }else{
+
+        }
+    }
+
+    public int generateDice(){
+        int valorEntero = (int) Math.floor(Math.random()*(6-1+1)+1); 
+        return valorEntero;
+    }
+
+    
    
     
 }

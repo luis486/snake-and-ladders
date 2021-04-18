@@ -7,10 +7,10 @@ public class Node {
     private Node left;
     private Node right;
     
-    public int row;
-    public int col;
+    private int row;
+    private int col;
 
-    public String data;
+    public int id;
 
     public Node(int r, int c) {
         this.row = r;
