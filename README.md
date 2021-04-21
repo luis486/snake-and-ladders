@@ -20,9 +20,9 @@ Visual studio code y mucha disposición!
 
 
 * **Luis Murcia** - *Todo el trabajo* - [luis486](https://github.com/luis486)
-* **Paula Trujillo** - * Contribuidor * [pulatrujillo27] (https://github.com/paulatrujillo27)
-* **Jhorman Mera** * Contribuidor * [JhormanMera] (https://github.com/JhormanMera)
-* **Alejandro Varela** - * Ayudas menores *
+* **Paula Trujillo** - *Contribuidor* - [paulatrujillo27](https://github.com/paulatrujillo27)
+* **Jhorman Mera** - *Contribuidor* - [JhormanMera](https://github.com/JhormanMera)
+* **Alejandro Varela** - *Ayudas menores*
 
 
 ## Expresiones de Gratitud 🎁
