@@ -7,8 +7,8 @@ import model.World;
 public class Menu {
 
     Scanner sc = new Scanner(System.in);
-    
-    private static final String SPACE =" ";
+
+    private static final String SPACE = " ";
     private World world;
 
     public void showMenu() {
@@ -20,25 +20,46 @@ public class Menu {
     }
 
     public void createGame() {
-        System.out.println("Por favor indique los parametros del juego de la siguiente manera: ");
-        System.out.println("En una misma línea separado con espacios pondra el numero de filas, de columnas,"
-        + "cantidad de serpientes, cantidad de escaleras y por ultimo sin espacios, los simbolos de los jugadores (respectivamente)");
-        String parametros = sc.nextLine();
-        createWorld(parametros);  
-        return;
+        System.out.println("(1) Quiero escoger los simbolos jugadores");
+        System.out.println("(2) Prefiero que se escojan aleatoriamente");
+        int option = sc.nextInt();
+        sc.nextLine();
+        if (option == 1) {
+            chooseManually();
+        } else if (option == 2) {
+            generateAutomatic();
+        } else {
+            System.out.println("La opcion ingresada es invalida, por favor elija otra opción");
+            createGame();
+        }
     }
 
+    public void chooseManually() {
+        System.out.println("Por favor indique los parametros del juego de la siguiente manera: ");
+        System.out.println("En una misma línea separado con espacios pondra el numero de filas, de columnas,"
+                + "cantidad de serpientes, cantidad de escaleras y por ultimo sin espacios, los simbolos de los jugadores (respectivamente)");
+        String parametros = sc.nextLine();
+        createWorld(parametros);
+    }
 
-    public void createWorld(String parametros){
+    public void generateAutomatic() {
+        System.out.println("Por favor indique los parametros del juego de la siguiente manera: ");
+        System.out.println("En una misma línea separado con espacios pondra el numero de filas, de columnas,"
+                + "cantidad de serpientes, cantidad de escaleras y por último cantidad de jugadores");
+        String parametros = sc.nextLine();
+        createWorld(parametros);
+    }
+
+    public void createWorld(String parametros) {
         String[] parts = parametros.split(SPACE);
-        world = new World(Integer.parseInt(parts[0]),Integer.parseInt(parts[1]));
+        world = new World(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
         System.out.println(world);
     }
 
     public void doOperation(int option) {
         switch (option) {
         case 1:
-        createGame();
+            createGame();
             break;
 
         case 2:
@@ -59,13 +80,13 @@ public class Menu {
         showMenu();
         int option = readOption();
 
-        if (option == 3){
+        if (option == 3) {
             System.out.println("Gracias por usar esta aplicacion");
-        }else{
+        } else {
             doOperation(option);
             startProgram();
         }
-      
+
     }
-    
+
 }

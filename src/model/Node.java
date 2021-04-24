@@ -6,15 +6,15 @@ public class Node {
     private Node bottom;
     private Node left;
     private Node right;
-    
+
     private int row;
     private int col;
-
     public int id;
 
-    public Node(int r, int c) {
+    public Node(int r, int c, int id) {
         this.row = r;
         this.col = c;
+        this.id = id;
     }
 
     public int getRow() {
@@ -57,8 +57,16 @@ public class Node {
         this.right = right;
     }
 
-    public String toString(){
-        return "[("+row+","+col+")]";
+    public int getId() {
+        return this.id;
     }
-  
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String toString() {
+        return "[(" + id + ")]";
+    }
+
 }
