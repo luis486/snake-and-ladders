@@ -6,7 +6,8 @@ public class Node {
     private Node bottom;
     private Node left;
     private Node right;
-
+    private Snakes snake;
+    private Ladders ladders;
     private int row;
     private int col;
     public int id;
@@ -15,6 +16,22 @@ public class Node {
         this.row = r;
         this.col = c;
         this.id = id;
+    }
+
+    public Snakes getSnake() {
+        return this.snake;
+    }
+
+    public void setSnake(Snakes snake) {
+        this.snake = snake;
+    }
+
+    public Ladders getLadders() {
+        return this.ladders;
+    }
+
+    public void setLadders(Ladders ladders) {
+        this.ladders = ladders;
     }
 
     public int getRow() {

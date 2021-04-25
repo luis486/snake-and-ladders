@@ -2,7 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
-import model.World;
+import model.*;
 
 public class Menu {
 
@@ -10,6 +10,9 @@ public class Menu {
 
     private static final String SPACE = " ";
     private World world;
+    private Snakes snakes;
+    private Ladders ladders;
+    private Player players;
 
     public void showMenu() {
         System.out.println("Bienvenido a su menu de confianza");
@@ -39,7 +42,7 @@ public class Menu {
         System.out.println("En una misma línea separado con espacios pondra el numero de filas, de columnas,"
                 + "cantidad de serpientes, cantidad de escaleras y por ultimo sin espacios, los simbolos de los jugadores (respectivamente)");
         String parametros = sc.nextLine();
-        createWorld(parametros);
+        createWorldOne(parametros);
     }
 
     public void generateAutomatic() {
@@ -47,12 +50,25 @@ public class Menu {
         System.out.println("En una misma línea separado con espacios pondra el numero de filas, de columnas,"
                 + "cantidad de serpientes, cantidad de escaleras y por último cantidad de jugadores");
         String parametros = sc.nextLine();
-        createWorld(parametros);
+        createWorldTwo(parametros);
     }
 
-    public void createWorld(String parametros) {
+    public void createWorldOne(String parametros) {
         String[] parts = parametros.split(SPACE);
         world = new World(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+        snakes = new Snakes(Integer.parseInt(parts[2]));
+        ladders = new Ladders(Integer.parseInt(parts[3]));
+
+        System.out.println(world);
+    }
+
+    public void createWorldTwo(String parametros) {
+        String[] parts = parametros.split(SPACE);
+        world = new World(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+        snakes = new Snakes(Integer.parseInt(parts[2]));
+        ladders = new Ladders(Integer.parseInt(parts[3]));
+        players = new Player(Integer.parseInt(parts[4]));
+
         System.out.println(world);
     }
 

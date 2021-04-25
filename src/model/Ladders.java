@@ -5,12 +5,10 @@ public class Ladders {
     private int number;
     private Node start;
     private Node end;
+    private int amountLadders;
 
-
-    public Ladders(int number, Node start, Node end) {
-        this.number = number;
-        this.start = start;
-        this.end = end;
+    public Ladders(int amountLadders) {
+        this.amountLadders = amountLadders;
     }
 
     public int getNumber() {
@@ -37,5 +35,4 @@ public class Ladders {
         this.end = end;
     }
 
-    
 }

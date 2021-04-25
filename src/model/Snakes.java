@@ -5,12 +5,14 @@ public class Snakes {
     private char letter;
     private Node start;
     private Node end;
+    private int amountSnakes;
 
+    public Snakes(int amountSnakes) {
+        this.amountSnakes = amountSnakes;
+    }
 
-    public Snakes(char letter, Node start, Node end) {
-        this.letter = letter;
-        this.start = start;
-        this.end = end;
+    public int getAmountSnakes() {
+        return this.amountSnakes;
     }
 
     public char getLetter() {
@@ -37,5 +39,4 @@ public class Snakes {
         this.end = end;
     }
 
-    
 }

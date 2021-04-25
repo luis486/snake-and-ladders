@@ -1,9 +1,18 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class World {
 
+    private static final String PATH = "data/leaderboard.doc";
     private Node firstNode;
-
+    private Player root;
+    private Player one;
     private int numRows;
     private int numCols;
 
@@ -12,6 +21,18 @@ public class World {
         numCols = m;
         createWorld();
         matrixEnum(firstNode);
+    }
+
+    public void saveData() throws IOException, ClassNotFoundException {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH));
+        oos.writeObject(root);
+        oos.close();
+    }
+
+    public void loadData() throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(PATH)));
+
+        ois.close();
     }
 
     private void createWorld() {
@@ -87,7 +108,7 @@ public class World {
         if (rightRow.getRight() != null) {
             rightRow.getRight().setId(rightRow.getId() + 1);
             matrixRightRow(rightRow.getRight());
-        } else if (rightRow.getLeft().getTop() != null) {
+        } else if (rightRow.getTop() != null) {
             rightRow.getTop().setId(rightRow.getId() + 1);
             matrixLeftRow(rightRow.getTop());
         }
@@ -97,11 +118,13 @@ public class World {
         if (leftRow.getLeft() != null) {
             leftRow.getLeft().setId(leftRow.getId() + 1);
             matrixLeftRow(leftRow.getLeft());
-        } else if (leftRow.getRight().getTop() != null) {
+        } else if (leftRow.getTop() != null) {
             leftRow.getTop().setId(leftRow.getId() + 1);
             matrixRightRow(leftRow.getTop());
         }
     }
+
+    // ----------------------------------------------SNAKES-------------------------------------------------------
 
     public void generateSnakes(int n, int m, int snakes) {
 
@@ -112,6 +135,8 @@ public class World {
         }
     }
 
+    // -----------------------------------------------LADDERS-----------------------------------------------------
+
     public void generateLadders(int n, int m, int ladders) {
         if (ladders > (n * m) / 4) {
             return;
@@ -120,15 +145,87 @@ public class World {
         }
     }
 
-    public int generateDice() {
+    // ---------------------------------------------------DICE---------------------------------------------------
+
+    public String generateDice() {
+        String msg = "";
         int valorEntero = (int) Math.floor(Math.random() * (6 - 1 + 1) + 1);
-        return valorEntero;
+        msg = "El valor del dado es " + valorEntero;
+        return msg;
     }
 
-    public int getId(int n, int m) {
-        int result = n * m;
-        result--;
-        return result;
+    // -----------------------------------------------------PLAYERS---------------------------------------------------
+
+    public void addPlayer(Player player) {
+        if (one == null) {
+            one = player;
+        } else {
+            addPlayer(one, player);
+        }
+    }
+
+    private void addPlayer(Player current, Player newPlayer) {
+        if (current.getPostPlayer() == null) {
+            current.setPostPlayer(newPlayer);
+            newPlayer.setPrePlayer(current);
+        } else {
+            addPlayer(current.getPostPlayer(), newPlayer);
+        }
+    }
+
+    public Player searchPlayer(char simbol) {
+        return searchPlayer(one, simbol);
+    }
+
+    private Player searchPlayer(Player current, char simbol) {
+        if (current == null || current.getSymbol() == simbol) {
+            return current;
+        } else {
+            return searchPlayer(current.getPostPlayer(), simbol);
+        }
+    }
+
+    // --------------------------------------------------BINARY-SEARCH-TREE---------------------------------------------
+
+    public void addWinner(Player player) throws ClassNotFoundException, IOException {
+        if (root == null) {
+            root = player;
+        } else {
+            addWinner(root, player);
+        }
+        saveData();
+    }
+
+    private void addWinner(Player current, Player newWinner) {
+        if (newWinner.getScore() <= current.getScore()) {
+            if (current.getLeft() == null) {
+                current.setLeft(newWinner);
+                newWinner.setParent(current);
+            } else {
+                addWinner(current.getLeft(), newWinner);
+            }
+        } else {
+            if (current.getRight() == null) {
+                current.setRight(newWinner);
+                newWinner.setParent(current);
+            } else {
+                addWinner(current.getRight(), newWinner);
+            }
+        }
+    }
+
+    public Player searchWinner(int score) {
+        return searchWinner(root, score);
+    }
+
+    private Player searchWinner(Player current, int score) {
+        if (current == null || current.getScore() == score) {
+            return current;
+        } else if (current.getScore() < score) {
+            return searchWinner(current.getRight(), score);
+        } else {
+            return searchWinner(current.getLeft(), score);
+        }
     }
 
 }
