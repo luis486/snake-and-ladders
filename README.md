@@ -4,6 +4,8 @@ Este proyecto está dirigido a aquellas personas que quieran pasar un buen rato 
 
 ## Comenzando 🚀
 
+A continuación podrás ver un poco sobre nuestro trabajo y además la gratitud a todos aquellas personas que colaboraron en la realización de este proyecto, salud y vida para todos!
+
 ### Pre-requisitos 📋
 
 Debes tener la actual versión de java para ejecutar tu codigo o para modificarlo, un buen editor de código a tu gusto, y ganas de jugar! 
@@ -22,14 +24,15 @@ Visual studio code y mucha disposición!
 
 ## Autores y contribuidores ✒️
 
-
-* **Luis Murcia** - *Todo el trabajo* - [luis486](https://github.com/luis486)
-* **Paula Trujillo** - *Contribuidor* - [paulatrujillo27](https://github.com/paulatrujillo27)
-* **Jhorman Mera** - *Contribuidor* - [JhormanMera](https://github.com/JhormanMera)
+* **Luis Murcia** - *Autor* - [luis486](https://github.com/luis486)
+* **Diana Olano** - *Autor* - [DianaOlanoU](https://github.com/DianaOlanoU)
+* **Paula Trujillo** - *Contribuidor Menor* - [paulatrujillo27](https://github.com/paulatrujillo27)
+* **Jhorman Mera** - *Contribuidor Menor* - [JhormanMera](https://github.com/JhormanMera)
+* **Juan Reyes** - *Autor de la matriz implementada* - [seyerman]
 * **Alejandro Varela** - *Ayudas menores*
 
-
 ## Expresiones de Gratitud 🎁
+💖😜
 
 * Comenta a otros sobre este proyecto 📢
 * Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
@@ -39,4 +42,4 @@ Visual studio code y mucha disposición!
 
 
 ---
-⌨️ con ❤️ por Luis Murcia 😊
+⌨️ con ❤️ por **Luis Murcia** y **Diana Olano** 😊
