@@ -15,59 +15,88 @@ public class Menu {
     private Player players;
 
     public void showMenu() {
-        System.out.println("Bienvenido a su menu de confianza");
-        System.out.println("Por favor digite una opcion");
-        System.out.println("(1) Quiero jugar Snake and Ladders!");
-        System.out.println("(2) Deseo ver el tablero de posiciones");
-        System.out.println("(3) Deseo salir");
+        System.out.println("___________________________________________Bienvenido a su menu de confianza________________________________________________________\n");
+        System.out.print("\nPor favor digite una opcion"+
+                            "\n"+
+                            "\n(1) Quiero jugar Snake and Ladders!"+
+                            "\n(2) Deseo ver el tablero de posiciones"+
+                            "\n(3) Deseo salir"+
+                            "\nEscriba aqui: ");
     }
 
     public void createGame() {
-        System.out.println("(1) Quiero escoger los simbolos jugadores");
-        System.out.println("(2) Prefiero que se escojan aleatoriamente");
+        System.out.print("\n¿Cual opcion escojeras?"+
+                            "\n"+
+                            "\n(1) Quiero escoger los simbolos jugadores"+
+                            "\n(2) Prefiero que se escojan aleatoriamente"+
+                            "\n(3) Deseo salir"+
+                            "\nEscriba aqui: ");
         int option = sc.nextInt();
         sc.nextLine();
-        if (option == 1) {
-            chooseManually();
-        } else if (option == 2) {
-            generateAutomatic();
-        } else {
-            System.out.println("La opcion ingresada es invalida, por favor elija otra opción");
-            createGame();
+        switch (option) {
+            case 1:
+                System.out.print("\n");
+                System.out.print("_____________________________________JUGADORES MANUALES___________________________________________________\n");
+                chooseManually();
+                System.out.print("\n");
+                break;
+            case 2:
+                System.out.print("\n");
+                System.out.print("_____________________________________JUGADORES ALEATORIOS___________________________________________________\n");
+                generateAutomatic();
+                System.out.print("\n");
+                break;
+            default:
+                System.out.println("La opcion ingresada es invalida, por favor elija otra opción");
+                createGame();
+                break;
         }
     }
 
     public void chooseManually() {
-        System.out.println("Por favor indique los parametros del juego de la siguiente manera: ");
-        System.out.println("En una misma línea separado con espacios pondra el numero de filas, de columnas,"
-                + "cantidad de serpientes, cantidad de escaleras y por ultimo sin espacios, los simbolos de los jugadores (respectivamente)");
+        System.out.print("\nPor favor indique los parametros del juego de la siguiente manera: "+
+                            "\n"+
+                            "\nEn una misma línea separado con espacios pondra el numero de filas, de columnas,"
+                            + "cantidad de serpientes, cantidad de escaleras y por ultimo sin espacios, los simbolos de los jugadores (respectivamente)"+
+                            "\nEscriba aqui: ");
         String parametros = sc.nextLine();
-        createWorldOne(parametros);
+        String[] parts = parametros.split(SPACE);
+        if(parametros.isEmpty() || parts.length<4){
+            System.err.println("¡Por favor digite un valor valido!");
+            chooseManually();
+        }
+        createWorldOne(parts);
+        
     }
 
     public void generateAutomatic() {
-        System.out.println("Por favor indique los parametros del juego de la siguiente manera: ");
-        System.out.println("En una misma línea separado con espacios pondra el numero de filas, de columnas,"
-                + "cantidad de serpientes, cantidad de escaleras y por último cantidad de jugadores");
+        System.out.print("\nPor favor indique los parametros del juego de la siguiente manera: "+
+                            "\n"+
+                            "\nEn una misma línea separado con espacios pondra el numero de filas, de columnas,"
+                            + "cantidad de serpientes, cantidad de escaleras y por último cantidad de jugadores"+
+                            "\nEscriba aqui: ");
         String parametros = sc.nextLine();
-        createWorldTwo(parametros);
+        String[] parts = parametros.split(SPACE);
+        if(parts.length==0 || parts.length<5){
+            System.err.println("¡Por favor digite un valor valido!");
+            generateAutomatic();
+        }
+        createWorldTwo(parts);
     }
 
-    public void createWorldOne(String parametros) {
-        String[] parts = parametros.split(SPACE);
-        world = new World(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
-        snakes = new Snakes(Integer.parseInt(parts[2]));
-        ladders = new Ladders(Integer.parseInt(parts[3]));
+    public void createWorldOne(String[] parameters) {
+        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
+        snakes = new Snakes(Integer.parseInt(parameters[2]));
+        ladders = new Ladders(Integer.parseInt(parameters[3]));
 
         System.out.println(world);
     }
 
-    public void createWorldTwo(String parametros) {
-        String[] parts = parametros.split(SPACE);
-        world = new World(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
-        snakes = new Snakes(Integer.parseInt(parts[2]));
-        ladders = new Ladders(Integer.parseInt(parts[3]));
-        players = new Player(Integer.parseInt(parts[4]));
+    public void createWorldTwo(String[] parameters) {
+        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
+        snakes = new Snakes(Integer.parseInt(parameters[2]));
+        ladders = new Ladders(Integer.parseInt(parameters[3]));
+        players = new Player(Integer.parseInt(parameters[4]));
 
         System.out.println(world);
     }
