@@ -5,10 +5,9 @@ public class Ladders {
     private int number;
     private Node start;
     private Node end;
-    private int amountLadders;
 
-    public Ladders(int amountLadders) {
-        this.amountLadders = amountLadders;
+    public Ladders(int number) {
+        this.number = number;
     }
 
     public int getNumber() {
@@ -33,6 +32,11 @@ public class Ladders {
 
     public void setEnd(Node end) {
         this.end = end;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(getNumber());
     }
 
 }

@@ -8,14 +8,17 @@ public class Node {
     private Node right;
     private Snakes snake;
     private Ladders ladders;
+    private Player players;
     private int row;
     private int col;
     public int id;
+    private boolean statusNode;
 
     public Node(int r, int c, int id) {
         this.row = r;
         this.col = c;
         this.id = id;
+        statusNode = false;
     }
 
     public Snakes getSnake() {
@@ -23,6 +26,7 @@ public class Node {
     }
 
     public void setSnake(Snakes snake) {
+        this.statusNode = true;
         this.snake = snake;
     }
 
@@ -31,6 +35,7 @@ public class Node {
     }
 
     public void setLadders(Ladders ladders) {
+        this.statusNode = true;
         this.ladders = ladders;
     }
 
@@ -82,8 +87,41 @@ public class Node {
         this.id = id;
     }
 
+    public boolean isStatusNode() {
+        return this.statusNode;
+    }
+
+    public boolean getStatusNode() {
+        return this.statusNode;
+    }
+
+    public void setStatusNode(boolean statusNode) {
+        this.statusNode = statusNode;
+    }
+
+    public Player getPlayers() {
+        return this.players;
+    }
+
+    public void setPlayers(Player p) {
+        if (players == null) {
+            this.players = p;
+        } else {
+            p.setPostPlayerInNode(p);
+        }
+    }
+
     public String toString() {
-        return "[(" + id + ")]";
+        String msg = "";
+        if (snake != null) {
+            msg += " " + "\033[0;31m" + snake + "\033[0m";
+        } else if (ladders != null) {
+            msg += " " + "\033[0;35m" + ladders + "\033[0m";
+        } else if (players != null) {
+            msg += " " + "\033[0;32m" + players + "\033[0m";
+        }
+        return "[" + id + " " + msg + "]";
+
     }
 
 }

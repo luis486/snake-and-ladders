@@ -5,14 +5,9 @@ public class Snakes {
     private char letter;
     private Node start;
     private Node end;
-    private int amountSnakes;
 
-    public Snakes(int amountSnakes) {
-        this.amountSnakes = amountSnakes;
-    }
-
-    public int getAmountSnakes() {
-        return this.amountSnakes;
+    public Snakes(char letter) {
+        this.letter = letter;
     }
 
     public char getLetter() {
@@ -37,6 +32,11 @@ public class Snakes {
 
     public void setEnd(Node end) {
         this.end = end;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(getLetter());
     }
 
 }

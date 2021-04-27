@@ -5,28 +5,24 @@ import java.io.Serializable;
 public class Player implements Serializable {
 
     private Player parent;
-    private Player right;
+    private Player right; // Arbol Binario
     private Player left;
-    private Player prePlayer;
-    private Player postPlayer;
+    private Player postPlayer; // In game
+    private Player postPlayerInNode; // En cada casilla
     private String nickname;
-    private int amountPlayers;
     private char symbol;
     private int moves;
     private int score;
+    private int position;
+    private int dice;
+    private boolean isWinner;
 
     public Player(char symbol) {
         this.score = 0;
         this.symbol = symbol;
         this.moves = 0;
-    }
-
-    public Player(int amountPlayers) {
-        this.amountPlayers = amountPlayers;
-    }
-
-    public int getAmountPlayers() {
-        return this.amountPlayers;
+        this.position = 1;
+        this.isWinner = false;
     }
 
     public Player getParent() {
@@ -51,14 +47,6 @@ public class Player implements Serializable {
 
     public void setLeft(Player left) {
         this.left = left;
-    }
-
-    public Player getPrePlayer() {
-        return this.prePlayer;
-    }
-
-    public void setPrePlayer(Player prePlayer) {
-        this.prePlayer = prePlayer;
     }
 
     public Player getPostPlayer() {
@@ -101,4 +89,56 @@ public class Player implements Serializable {
         this.score = score;
     }
 
+    public Player getPostPlayerInNode() {
+        return this.postPlayerInNode;
+    }
+
+    public void setPostPlayerInNode(Player p) {
+        if (postPlayerInNode != null) {
+            postPlayerInNode.setPostPlayerInNode(p);
+        } else {
+            this.postPlayerInNode = p;
+        }
+    }
+
+    public int getPosition() {
+        return this.position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public int getDice() {
+        return this.dice;
+    }
+
+    public void setDice(int dice) {
+        this.dice = dice;
+    }
+
+    public boolean isIsWinner() {
+        return this.isWinner;
+    }
+
+    public boolean getIsWinner() {
+        return this.isWinner;
+    }
+
+    public void setIsWinner(boolean isWinner) {
+        this.isWinner = isWinner;
+    }
+
+    public String getPartner() {
+        String msg = String.valueOf(symbol);
+        if (postPlayerInNode != null) {
+            msg += postPlayerInNode.getPartner();
+        }
+        return msg;
+    }
+
+    @Override
+    public String toString() {
+        return getPartner();
+    }
 }
