@@ -230,8 +230,6 @@ public class World {
         if (current.getPostPlayer() == null) {
             setPlayerInNode(newPlayer, firstNode, firstNode);
             current.setPostPlayer(newPlayer);
-
-            System.out.println(newPlayer.getSymbol());
         } else {
             addPlayer(current.getPostPlayer(), newPlayer);
         }
@@ -240,7 +238,7 @@ public class World {
     public void setPlayerInNode(Player player, Node current, Node firstRow) {
         if (current.getId() == player.getPosition()) {
             current.setPlayers(player);
-            System.out.println("Hola" + current.getId());
+            System.out.println(player.getSymbol());
 
         } else if (current.getRight() != null) {
             setPlayerInNode(player, current.getRight(), firstRow);
