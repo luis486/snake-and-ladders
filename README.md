@@ -28,7 +28,7 @@ Visual studio code y mucha disposición!
 * **Diana Olano** - *Autor* - [DianaOlanoU](https://github.com/DianaOlanoU)
 * **Paula Trujillo** - *Contribuidor Menor* - [paulatrujillo27](https://github.com/paulatrujillo27)
 * **Jhorman Mera** - *Contribuidor Menor* - [JhormanMera](https://github.com/JhormanMera)
-* **Juan Reyes** - *Autor de la matriz implementada* - [seyerman]
+* **Juan Reyes** - *Autor de la matriz implementada* - [seyerman](https://github.com/seyerman)
 * **Alejandro Varela** - *Ayudas menores*
 
 ## Expresiones de Gratitud 🎁🥳

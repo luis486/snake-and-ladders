@@ -91,11 +91,15 @@ public class Menu {
         int ladders = Integer.parseInt(parts[3]);
         int n = Integer.parseInt(parts[0]);
         int m = Integer.parseInt(parts[1]);
+        int players = Integer.parseInt(parts[4]);
 
         if (snakes > (n * m) / 5 || ladders > (n * m) / 5) {
 
             System.out.println(
                     "La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
+            generateAutomatic();
+        } else if (players > 9) {
+            System.out.println("La cantidad de jugadores no puede ser mayor a 9, porque no hay mas símbolos!");
             generateAutomatic();
         } else {
             createWorldTwo(parts);
@@ -105,14 +109,14 @@ public class Menu {
 
     public void createWorldOne(String[] parameters) {
         world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
-                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
+                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
 
         System.out.println(world);
     }
 
     public void createWorldTwo(String[] parameters) {
         world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
-                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
+                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
 
         System.out.println(world);
     }

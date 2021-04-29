@@ -12,18 +12,52 @@ public class World {
     private int numCols;
     private int amountSnakes;
     private int amountLadders;
+    private int amountPlayers;
     private int sizeMatrix;
 
-    public World(int n, int m, int as, int al) {
+    public World(int n, int m, int as, int al, int ap) {
         numRows = n;
         numCols = m;
         amountSnakes = as;
         amountLadders = al;
+        amountPlayers = ap;
         sizeMatrix = n * m;
         createWorld();
         matrixEnum(firstNode);
         generateSnakes(as, 0, 'A');
         generateLadders(al, 0, 1);
+    }
+
+    public Player getActual() {
+        return this.actual;
+    }
+
+    public void setActual(Player actual) {
+        this.actual = actual;
+    }
+
+    public int getAmountSnakes() {
+        return this.amountSnakes;
+    }
+
+    public void setAmountSnakes(int amountSnakes) {
+        this.amountSnakes = amountSnakes;
+    }
+
+    public int getAmountLadders() {
+        return this.amountLadders;
+    }
+
+    public void setAmountLadders(int amountLadders) {
+        this.amountLadders = amountLadders;
+    }
+
+    public int getAmountPlayers() {
+        return this.amountPlayers;
+    }
+
+    public void setAmountPlayers(int amountPlayers) {
+        this.amountPlayers = amountPlayers;
     }
 
     public void saveData() throws IOException, ClassNotFoundException {
