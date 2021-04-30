@@ -10,19 +10,21 @@ public class Player implements Serializable {
     private Player postPlayer; // In game
     private Player postPlayerInNode; // En cada casilla
     private String nickname;
-    private char symbol;
     private int moves;
     private int score;
     private int position;
     private int dice;
     private boolean isWinner;
+    private char symbol;
+    private int lastPosition;
 
-    public Player(char symbol) {
+    public Player(char symbol, int lastPosition) {
         this.score = 0;
         this.symbol = symbol;
         this.moves = 0;
         this.position = 1;
         this.isWinner = false;
+        this.lastPosition = lastPosition;
     }
 
     public Player getParent() {
@@ -93,12 +95,33 @@ public class Player implements Serializable {
         return this.postPlayerInNode;
     }
 
-    public void setPostPlayerInNode(Player p) {
-        if (postPlayerInNode != null) {
-            postPlayerInNode.setPostPlayerInNode(p);
-        } else {
-            this.postPlayerInNode = p;
+    public int getLastPosition() {
+        return this.lastPosition;
+    }
+
+    public void setLastPosition(int lastPosition) {
+        this.lastPosition = lastPosition;
+    }
+
+    public void dice(int d) {
+        dice = d;
+        int result = position + d;
+        winner(result);
+        moves++;
+        setPostPlayerInNode(null);
+    }
+
+    public void winner(int result) {
+        if (result == lastPosition) {
+            setIsWinner(true);
+            position += dice;
+        } else if (result < lastPosition) {
+            position += dice;
         }
+    }
+
+    public void setPostPlayerInNode(Player p) {
+        this.postPlayerInNode = p;
     }
 
     public int getPosition() {
@@ -106,6 +129,7 @@ public class Player implements Serializable {
     }
 
     public void setPosition(int position) {
+        winner(position);
         this.position = position;
     }
 
@@ -117,10 +141,6 @@ public class Player implements Serializable {
         this.dice = dice;
     }
 
-    public boolean isIsWinner() {
-        return this.isWinner;
-    }
-
     public boolean getIsWinner() {
         return this.isWinner;
     }
@@ -129,16 +149,12 @@ public class Player implements Serializable {
         this.isWinner = isWinner;
     }
 
-    public String getPartner() {
-        String msg = String.valueOf(symbol);
-        if (postPlayerInNode != null) {
-            msg += postPlayerInNode.getPartner();
+    public String getPartner(Player first, String msg) {
+        if (first.getPostPlayerInNode() != null) {
+            msg += " " + first.getPostPlayerInNode().getSymbol();
+            return getPartner(first.getPostPlayerInNode(), msg);
+        } else {
+            return msg;
         }
-        return msg;
-    }
-
-    @Override
-    public String toString() {
-        return getPartner();
     }
 }

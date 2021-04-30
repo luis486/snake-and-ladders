@@ -9,6 +9,7 @@ public class Node {
     private Snakes snake;
     private Ladders ladders;
     private Player players;
+    private boolean visible;
     private int row;
     private int col;
     public int id;
@@ -18,6 +19,7 @@ public class Node {
         this.row = r;
         this.col = c;
         this.id = id;
+        visible = true;
         statusNode = false;
     }
 
@@ -103,24 +105,40 @@ public class Node {
         return this.players;
     }
 
-    public void setPlayers(Player p) {
-        if (players == null) {
-            this.players = p;
-        } else {
-            p.setPostPlayerInNode(p);
-        }
+    public Boolean isVisible() {
+        return this.visible;
     }
 
+    public Boolean getVisible() {
+        return this.visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
+
+    public void setPlayers(Player p) {
+        this.players = p;
+    }
+
+    @Override
     public String toString() {
+        String render = " ";
+        if (visible == true) {
+            render = String.valueOf(id);
+        }
         String msg = "";
         if (snake != null) {
+
             msg += " " + "\033[0;31m" + snake + "\033[0m";
         } else if (ladders != null) {
+
             msg += " " + "\033[0;35m" + ladders + "\033[0m";
-        } else if (players != null) {
-            msg += " " + "\033[0;32m" + players + "\033[0m";
         }
-        return "[" + id + " " + msg + "]";
+        if (this.players != null) {
+            msg += " " + "\033[0;32m" + players.getPartner(players, String.valueOf(players.getSymbol())) + "\033[0m";
+        }
+        return "[" + " " + render + " " + msg + " " + "]";
 
     }
 

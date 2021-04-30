@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
+import javafx.application.Platform;
 import model.*;
 
 public class Menu {
@@ -10,9 +11,6 @@ public class Menu {
 
     private static final String SPACE = " ";
     private World world;
-    private Snakes snakes;
-    private Ladders ladders;
-    private Player players;
 
     public void showMenu() {
         System.out.println(
@@ -27,24 +25,24 @@ public class Menu {
         int option = sc.nextInt();
         sc.nextLine();
         switch (option) {
-        case 1:
-            System.out.print("\n");
-            System.out.print(
-                    "_____________________________________JUGADORES MANUALES___________________________________________________\n");
-            chooseManually();
-            System.out.print("\n");
-            break;
-        case 2:
-            System.out.print("\n");
-            System.out.print(
-                    "_____________________________________JUGADORES ALEATORIOS___________________________________________________\n");
-            generateAutomatic();
-            System.out.print("\n");
-            break;
-        default:
-            System.out.println("La opcion ingresada es invalida, por favor elija otra opción");
-            createGame();
-            break;
+            case 1:
+                System.out.print("\n");
+                System.out.print(
+                        "_____________________________________JUGADORES MANUALES___________________________________________________\n");
+                chooseManually();
+                System.out.print("\n");
+                break;
+            case 2:
+                System.out.print("\n");
+                System.out.print(
+                        "_____________________________________JUGADORES ALEATORIOS___________________________________________________\n");
+                generateAutomatic();
+                System.out.print("\n");
+                break;
+            default:
+                System.out.println("La opcion ingresada es invalida, por favor elija otra opción");
+                createGame();
+                break;
         }
     }
 
@@ -73,6 +71,9 @@ public class Menu {
             createWorldOne(parts);
         }
         assignManually(parts[4], 0);
+        System.out.println(world);
+        initializeGame(false);
+
     }
 
     public void generateAutomatic() {
@@ -93,32 +94,32 @@ public class Menu {
         int m = Integer.parseInt(parts[1]);
         int players = Integer.parseInt(parts[4]);
 
-        if (snakes > (n * m) / 5 || ladders > (n * m) / 5) {
+        if (players > 9) {
+            System.out.println("La cantidad de jugadores no puede ser mayor a 9, porque no hay mas símbolos!");
+            generateAutomatic();
+        }
 
+        if (snakes > (n * m) / 5 || ladders > (n * m) / 5) {
             System.out.println(
                     "La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
-            generateAutomatic();
-        } else if (players > 9) {
-            System.out.println("La cantidad de jugadores no puede ser mayor a 9, porque no hay mas símbolos!");
             generateAutomatic();
         } else {
             createWorldTwo(parts);
         }
         assignAutomatic(Integer.parseInt(parts[4]), 0);
+        System.out.println(world);
+        initializeGame(false);
     }
 
     public void createWorldOne(String[] parameters) {
         world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
-                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
-
-        System.out.println(world);
+                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
     }
 
     public void createWorldTwo(String[] parameters) {
         world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
                 Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
 
-        System.out.println(world);
     }
 
     public void assignManually(String parameters, int contador) {
@@ -129,6 +130,29 @@ public class Menu {
 
     }
 
+    public void gameSimulation() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (!world.getFinished()) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            world.generateDice();
+                            System.out.println(world);
+                        }
+                    });
+                    gameSimulation();
+                }
+            }
+        }).start();
+    }
+
     public void assignAutomatic(int amount, int contador) {
         if (contador < amount) {
             world.addPlayer(generateRandom(contador + 1));
@@ -136,55 +160,81 @@ public class Menu {
         }
     }
 
+    public void initializeGame(boolean render) {
+        if (render == false) {
+            System.out.println("Por favor ingrese un salto de línea para iniciar");
+            String jump = sc.nextLine();
+            if (jump.equals("")) {
+                System.out.println(world.generateDice());
+                world.setVisible(false);
+                System.out.println(world);
+                initializeGame(world.getFinished());
+            } else if (jump.equals("simul")) {
+                System.out.println("Usted ha entrado en modo simulación");
+                gameSimulation();
+            } else if (jump.equals("menu")) {
+                showMenu();
+            } else if (jump.equals("num")) {
+                world.setVisible(true);
+                System.out.println(world);
+                initializeGame(render);
+            } else {
+                System.out.println("El salto de línea debe estar vacío!");
+                initializeGame(render);
+            }
+        } else {
+            System.out.println(
+                    "El jugador " + world.getActual().getSymbol() + " ha ganado " + world.getActual().getMoves());
+            System.out.println("Por favor ingrese su nickname: ");
+            String nickname = sc.nextLine();
+            world.getActual().setNickname(nickname);
+        }
+    }
+
     public char generateRandom(int option) {
         char car = '[';
         switch (option) {
-        case 1:
-            car = '#';
-            break;
-        case 2:
-            car = '$';
-            break;
-        case 3:
-            car = '%';
-            break;
-        case 4:
-            car = '&';
-            break;
-        case 5:
-            car = '/';
-            break;
-        case 6:
-            car = '(';
-            break;
-        case 7:
-            car = ')';
-            break;
-        case 8:
-            car = '.';
-            break;
-        case 9:
-            car = '*';
-            break;
+            case 1:
+                car = '#';
+                break;
+            case 2:
+                car = '$';
+                break;
+            case 3:
+                car = '%';
+                break;
+            case 4:
+                car = '&';
+                break;
+            case 5:
+                car = '/';
+                break;
+            case 6:
+                car = '(';
+                break;
+            case 7:
+                car = ')';
+                break;
+            case 8:
+                car = '.';
+                break;
+            case 9:
+                car = '*';
+                break;
         }
         return car;
     }
 
-    public void validateSnakes(int n, int m, int snakes) {
-
-    }
-
     public void doOperation(int option) {
         switch (option) {
-        case 1:
-            createGame();
-            break;
-
-        case 2:
-            ;
-            break;
-        default:
-            System.out.println("Error, opcion invalida, por favor digite otra opcion");
+            case 1:
+                createGame();
+                break;
+            case 2:
+                ;
+                break;
+            default:
+                System.out.println("Error, opcion invalida, por favor digite otra opcion");
         }
     }
 
