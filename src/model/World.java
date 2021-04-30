@@ -4,10 +4,11 @@ import java.io.*;
 
 public class World {
 
-    private static final String PATH = "data/leaderboard.doc";
+    public final String PATH = "data/leaderboard.lmh";
     private Node firstNode;
     private Player actual; // Jugador actual al momento
     private Player one; // Lista enlazada de jugadores
+    private Player root;
     private int numRows;
     private int numCols;
     private int amountSnakes;
@@ -16,6 +17,9 @@ public class World {
     private boolean visible;
     private int sizeMatrix;
     private boolean finished;
+
+    public World() {
+    }
 
     public World(int n, int m, int as, int al, int ap) {
         numRows = n;
@@ -98,14 +102,17 @@ public class World {
 
     public void saveData() throws IOException, ClassNotFoundException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH));
-        oos.writeObject(one);
+        oos.writeObject(root);
         oos.close();
     }
 
     public void loadData() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(PATH)));
-
-        ois.close();
+        File file = new File(PATH);
+        if (file.length() > 0) {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(PATH)));
+            root = (Player) ois.readObject();
+            ois.close();
+        }
     }
 
     // -------------------------------CREATE-AND-PRINT-MATRIX-------------------------------------------------
@@ -247,7 +254,6 @@ public class World {
     }
 
     public Node searchNode(int id, Node current, Node firstRow) {
-
         if (current.getId() == id && current.getStatusNode() == false) {
             return current;
         } else if (current.getRight() != null) {
@@ -262,7 +268,6 @@ public class World {
     // ----------------------------------------VALIDATION-SNAKE-AND-LADDERS-----------------------------------
 
     public Node validateSnakesOrLadders(Node after) {
-        System.out.println(after.getId());
         if (after.getSnake() != null) {
             return validateSnakes(after, after.getId());
         } else if (after.getLadders() != null) {
@@ -416,16 +421,49 @@ public class World {
 
     // --------------------------------------------------BINARY-SEARCH-TREE---------------------------------------------
 
-    /*
-     * public void addWinner(Player player) throws ClassNotFoundException,
-     * IOException { if (root == null) { root = player; } else { addWinner(root,
-     * player); } saveData(); }
-     * 
-     * private void addWinner(Player current, Player newWinner) { if
-     * (newWinner.getScore() <= current.getScore()) { if (current.getLeft() == null)
-     * { current.setLeft(newWinner); newWinner.setParent(current); } else {
-     * addWinner(current.getLeft(), newWinner); } } else { if (current.getRight() ==
-     * null) { current.setRight(newWinner); newWinner.setParent(current); } else {
-     * addWinner(current.getRight(), newWinner); } } }
-     */
+    public void addWinner(Player player) throws ClassNotFoundException, IOException {
+        if (root == null) {
+            root = player;
+        } else {
+            addWinner(root, player);
+        }
+        saveData();
+    }
+
+    private void addWinner(Player current, Player newWinner) {
+        if (newWinner.getScore() >= current.getScore()) {
+            if (current.getLeft() == null) {
+                current.setLeft(newWinner);
+                newWinner.setParent(current);
+            } else {
+                addWinner(current.getLeft(), newWinner);
+            }
+        } else {
+            if (current.getRight() == null) {
+                current.setRight(newWinner);
+                newWinner.setParent(current);
+            } else {
+                addWinner(current.getRight(), newWinner);
+            }
+        }
+    }
+
+    public void printWinners() {
+        if (root != null) {
+            printWinners(root);
+        } else {
+            System.out.println("No hay jugadores aún!");
+        }
+    }
+
+    private void printWinners(Player player) {
+        if (player == null) {
+            return;
+        } else {
+            printWinners(player.getLeft());
+            System.out.println(player.toString());
+            printWinners(player.getRight());
+        }
+    }
+
 }

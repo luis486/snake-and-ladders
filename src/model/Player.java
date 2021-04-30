@@ -157,4 +157,9 @@ public class Player implements Serializable {
             return msg;
         }
     }
+
+    public String toString() {
+        score = moves * lastPosition;
+        return String.valueOf(score);
+    }
 }

@@ -1,8 +1,7 @@
 package ui;
 
+import java.io.IOException;
 import java.util.Scanner;
-
-import javafx.application.Platform;
 import model.*;
 
 public class Menu {
@@ -11,6 +10,7 @@ public class Menu {
 
     private static final String SPACE = " ";
     private World world;
+    private boolean centinela = false;
 
     public void showMenu() {
         System.out.println(
@@ -131,26 +131,19 @@ public class Menu {
     }
 
     public void gameSimulation() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (!world.getFinished()) {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            world.generateDice();
-                            System.out.println(world);
-                        }
-                    });
-                    gameSimulation();
-                }
+        if (!world.getFinished()) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }).start();
+            System.out.println(world.generateDice());
+            System.out.println(world);
+            gameSimulation();
+
+        } else {
+            showWinner();
+        }
     }
 
     public void assignAutomatic(int amount, int contador) {
@@ -162,7 +155,7 @@ public class Menu {
 
     public void initializeGame(boolean render) {
         if (render == false) {
-            System.out.println("Por favor ingrese un salto de línea para iniciar");
+            System.out.println("Por favor ingrese un salto de línea (enter) para continuar");
             String jump = sc.nextLine();
             if (jump.equals("")) {
                 System.out.println(world.generateDice());
@@ -170,8 +163,9 @@ public class Menu {
                 System.out.println(world);
                 initializeGame(world.getFinished());
             } else if (jump.equals("simul")) {
-                System.out.println("Usted ha entrado en modo simulación");
+                centinela = true;
                 gameSimulation();
+                centinela = false;
             } else if (jump.equals("menu")) {
                 System.out.println("Usted ha elegido devolverse al menu principal, gracias por jugar");
                 return;
@@ -184,11 +178,14 @@ public class Menu {
                 initializeGame(render);
             }
         } else {
-            System.out.println("El jugador " + world.getActual().getSymbol() + " ha ganado con un total de "
-                    + world.getActual().getMoves() + " movimientos!");
-            calculateWinner();
-
+            showWinner();
         }
+    }
+
+    public void showWinner() {
+        System.out.println("El jugador " + world.getActual().getSymbol() + " ha ganado con un total de "
+                + world.getActual().getMoves() + " movimientos!");
+        calculateWinner();
     }
 
     public void calculateWinner() {
@@ -199,7 +196,15 @@ public class Menu {
             calculateWinner();
         } else {
             world.getActual().setNickname(nickname);
+            try {
+                world.addWinner(world.getActual());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             System.out.println("Usted podrá ver su puntaje en la opción (2) del menú, muchas gracias por jugar!");
+
         }
     }
 
@@ -243,7 +248,7 @@ public class Menu {
                 createGame();
                 break;
             case 2:
-                ;
+
                 break;
             default:
                 System.out.println("Error, opcion invalida, por favor digite otra opcion");
@@ -256,17 +261,27 @@ public class Menu {
         return option;
     }
 
-    public void startProgram() {
-        showMenu();
-        int option = readOption();
-
-        if (option == 3) {
-            System.out.println("Gracias por usar esta aplicacion");
-        } else {
-            doOperation(option);
-            startProgram();
+    public void showLeaderBoard() {
+        try {
+            world.loadData();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
 
+    public void startProgram() {
+        if (centinela == false) {
+            showMenu();
+            int option = readOption();
+            if (option == 3) {
+                System.out.println("Gracias por usar esta aplicacion");
+            } else {
+                doOperation(option);
+                startProgram();
+            }
+        }
+    }
 }
