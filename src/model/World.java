@@ -108,15 +108,15 @@ public class World {
         ois.close();
     }
 
+    // -------------------------------CREATE-AND-PRINT-MATRIX-------------------------------------------------
+
     private void createWorld() {
         firstNode = new Node(0, 0, 0);
         createRow(0, 0, firstNode);
     }
 
-    // -------------------------------CREATE-AND-PRINT-MATRIX-------------------------------------------------
-
     private void createRow(int i, int j, Node firstRow) { // Llama a create col para que la columna sobre ese nuevo
-                                                          // método
+                                                          // metodo
         createCol(i, j + 1, firstRow, firstRow.getTop());
         if (i + 1 < numRows) {
             Node firstDownRow = new Node(i + 1, j, 0);
@@ -237,6 +237,9 @@ public class World {
 
     public Node validateSnakes(Node current, int id) {
         if (current.getSnake().getStart().getId() == id) {
+            System.out.println("El jugador " + actual.getSymbol()
+                    + " cayó en el principio de una serpiente, retrocederá a la casilla "
+                    + current.getSnake().getEnd().getId());
             return current.getSnake().getEnd();
         } else {
             return current;
@@ -300,6 +303,9 @@ public class World {
 
     public Node validateLadders(Node current, int id) {
         if (current.getLadders().getEnd().getId() == id) {
+            System.out.println(
+                    "El jugador " + actual.getSymbol() + " cayó en el final de una escalera, avanzará a la casilla "
+                            + current.getLadders().getStart().getId());
             return current.getLadders().getStart();
         } else {
             return current;
@@ -321,7 +327,6 @@ public class World {
         if (validate.getPlayers() == null) {
             actual.setPosition(validate.getId());
             validate.setPlayers(actual);
-
         } else {
             actual.setPosition(validate.getId());
             setInBox(actual, validate.getPlayers());
@@ -330,8 +335,6 @@ public class World {
         if (actual.getIsWinner() == true) {
             setFinished(true);
         }
-
-        System.out.println(actual.getPosition());
 
         msg = "El jugador " + actual.getSymbol() + " ha lanzado el dado y ha obtenido: " + valorEntero;
         actual = pla;

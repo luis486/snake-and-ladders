@@ -173,7 +173,8 @@ public class Menu {
                 System.out.println("Usted ha entrado en modo simulación");
                 gameSimulation();
             } else if (jump.equals("menu")) {
-                showMenu();
+                System.out.println("Usted ha elegido devolverse al menu principal, gracias por jugar");
+                return;
             } else if (jump.equals("num")) {
                 world.setVisible(true);
                 System.out.println(world);
@@ -183,16 +184,27 @@ public class Menu {
                 initializeGame(render);
             }
         } else {
-            System.out.println(
-                    "El jugador " + world.getActual().getSymbol() + " ha ganado " + world.getActual().getMoves());
-            System.out.println("Por favor ingrese su nickname: ");
-            String nickname = sc.nextLine();
+            System.out.println("El jugador " + world.getActual().getSymbol() + " ha ganado con un total de "
+                    + world.getActual().getMoves() + " movimientos!");
+            calculateWinner();
+
+        }
+    }
+
+    public void calculateWinner() {
+        System.out.println("Por favor ingrese su nickname: ");
+        String nickname = sc.nextLine();
+        if (nickname.equals("")) {
+            System.out.println("Su nickname no puede estar vacio, por favor, vuelva a intentarlo!");
+            calculateWinner();
+        } else {
             world.getActual().setNickname(nickname);
+            System.out.println("Usted podrá ver su puntaje en la opción (2) del menú, muchas gracias por jugar!");
         }
     }
 
     public char generateRandom(int option) {
-        char car = '[';
+        char car = ' ';
         switch (option) {
             case 1:
                 car = '#';

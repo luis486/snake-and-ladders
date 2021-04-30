@@ -103,23 +103,6 @@ public class Player implements Serializable {
         this.lastPosition = lastPosition;
     }
 
-    public void dice(int d) {
-        dice = d;
-        int result = position + d;
-        winner(result);
-        moves++;
-        setPostPlayerInNode(null);
-    }
-
-    public void winner(int result) {
-        if (result == lastPosition) {
-            setIsWinner(true);
-            position += dice;
-        } else if (result < lastPosition) {
-            position += dice;
-        }
-    }
-
     public void setPostPlayerInNode(Player p) {
         this.postPlayerInNode = p;
     }
@@ -147,6 +130,23 @@ public class Player implements Serializable {
 
     public void setIsWinner(boolean isWinner) {
         this.isWinner = isWinner;
+    }
+
+    public void dice(int d) {
+        dice = d;
+        int result = position + d;
+        winner(result);
+        moves++;
+        setPostPlayerInNode(null);
+    }
+
+    public void winner(int result) {
+        if (result == lastPosition) {
+            setIsWinner(true);
+            position += dice;
+        } else if (result < lastPosition) {
+            position += dice;
+        }
     }
 
     public String getPartner(Player first, String msg) {
