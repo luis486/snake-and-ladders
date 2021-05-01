@@ -14,8 +14,7 @@ public class Menu {
     // -----------------------------------------------------MENU-METHODS------------------------------------------
 
     public void showMenu() {
-        System.out.println(
-                "___________________________________________Bienvenido a su menu de confianza________________________________________________________\n");
+        System.out.println("\033[035m___________________________________________Bienvenido a su menu de confianza________________________________________________________\n"+"\033[0m");
         System.out.print("\nPor favor digite una opcion" + "\n" + "\n(1) Quiero jugar Snake and Ladders!"
                 + "\n(2) Deseo ver el tablero de posiciones" + "\n(3) Deseo salir" + "\nEscriba aqui: ");
     }
@@ -28,21 +27,15 @@ public class Menu {
         switch (option) {
             case 1:
                 System.out.print("\n");
-                System.out.print(
-                        "_____________________________________JUGADORES MANUALES___________________________________________________\n");
+                System.out.print("\033[035m_____________________________________JUGADORES MANUALES___________________________________________________\n"+"\033[0m");
                 chooseManually();
                 System.out.print("\n");
                 break;
             case 2:
                 System.out.print("\n");
-                System.out.print(
-                        "_____________________________________JUGADORES ALEATORIOS___________________________________________________\n");
+                System.out.print("\033[035m_____________________________________JUGADORES ALEATORIOS___________________________________________________\n"+"\033[0m");
                 generateAutomatic();
                 System.out.print("\n");
-                break;
-            default:
-                System.out.println("La opcion ingresada es invalida, por favor elija otra opción");
-                createGame();
                 break;
         }
     }
@@ -56,7 +49,10 @@ public class Menu {
                 showLeaderBoard();
                 break;
             default:
-                System.out.println("Error, opcion invalida, por favor digite otra opcion");
+                System.out.print("\n");
+                System.err.println("La opcion ingresada es invalida, por favor elija opcion que se le pide");
+                System.out.print("\n");
+                break;
         }
     }
 
@@ -70,7 +66,9 @@ public class Menu {
         showMenu();
         int option = readOption();
         if (option == 3) {
-            System.out.println("Gracias por usar esta aplicacion");
+            System.out.print("\n");
+            System.out.print("\033[035m_____________________________________APLICACION CERRADA________________________________________________________\n"+"\033[0m");
+            System.out.print("\n");
         } else {
             doOperation(option);
             startProgram();
@@ -87,7 +85,7 @@ public class Menu {
         String parameters = sc.nextLine();
         String[] parts = parameters.split(SPACE);
         if (parts.length != 5) {
-            System.out.println("¡Por favor digite los valores indicados!");
+            System.err.println("¡Por favor digite los valores indicados!");
             chooseManually();
         }
 
@@ -97,10 +95,11 @@ public class Menu {
         int m = Integer.parseInt(parts[1]);
 
         if (snakes > (n * m) / 5 || ladders > (n * m) / 5) {
-            System.out.println(
-                    "La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
+            System.err.println("La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
             chooseManually();
         } else {
+            System.out.println("\n");
+            System.out.println("************TABLERO GENERADO POR LOS PARAMETROS ANTERIORMENTE PEDIDOS**********");
             createWorldManually(parts);
         }
         assignManually(parts[4], 0);
@@ -138,7 +137,7 @@ public class Menu {
         String parameters = sc.nextLine();
         String[] parts = parameters.split(SPACE);
         if (parts.length != 5) {
-            System.out.println("¡Por favor digite un valor valido!");
+            System.err.println("¡Por favor digite un valor valido!");
             generateAutomatic();
         }
 
@@ -149,15 +148,16 @@ public class Menu {
         int players = Integer.parseInt(parts[4]);
 
         if (players > 9) {
-            System.out.println("La cantidad de jugadores no puede ser mayor a 9, porque no hay mas símbolos!");
+            System.err.println("La cantidad de jugadores no puede ser mayor a 9, porque no hay mas símbolos!");
             generateAutomatic();
         }
 
         if (snakes > (n * m) / 5 || ladders > (n * m) / 5) {
-            System.out.println(
-                    "La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
+            System.err.println("La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
             generateAutomatic();
         } else {
+            System.out.println("\n");
+            System.out.println("************TABLERO GENERADO POR LOS PARAMETROS ANTERIORMENTE PEDIDOS**********");
             createWorldAutomatic(parts);
         }
         assignAutomatic(Integer.parseInt(parts[4]), 0);
@@ -240,26 +240,32 @@ public class Menu {
 
     public void initializeGame(boolean render) {
         if (render == false) {
-            System.out.println("Por favor ingrese un salto de línea (enter) para continuar");
+            System.out.println("\033[036mPor favor ingrese un salto de línea (enter) para continuar"+"\033[0m");
             String jump = sc.nextLine();
             if (jump.equals("")) {
                 System.out.println(world.generateDice());
                 world.setVisible(false);
                 System.out.println(world);
                 initializeGame(world.getFinished());
-            } else if (jump.equals("simul")) {
-
+            } else if (jump.equalsIgnoreCase("simul")) {
+                System.out.println("\n");
+                System.out.println("************USTED ESTA EN UNA SIMULACION DEL JUEGO ACTUAL************");
+                System.out.println("\n");
                 gameSimulation();
 
-            } else if (jump.equals("menu")) {
+            } else if (jump.equalsIgnoreCase("menu")) {
                 System.out.println("Usted ha elegido devolverse al menu principal, gracias por jugar");
                 return;
-            } else if (jump.equals("num")) {
+            } else if (jump.equalsIgnoreCase("num")) {
+                System.out.print("\n");
+                System.out.println("************TABLERO ENUMERADO************");
                 world.setVisible(true);
                 System.out.println(world);
                 initializeGame(render);
             } else {
-                System.out.println("El salto de línea debe estar vacío!");
+                System.out.print("\n");
+                System.err.println("El salto de línea debe estar vacío!");
+                System.out.print("\n");
                 initializeGame(render);
             }
         } else {
@@ -270,16 +276,17 @@ public class Menu {
     // -------------------------------------------------WINNERS---------------------------------------------------
 
     public void showWinner() {
-        System.out.println("El jugador " + world.getActual().getSymbol() + " ha ganado con un total de "
-                + world.getActual().getMoves() + " movimientos!");
+        System.out.println("\033[032m¡EL JUGADOR " + world.getActual().getSymbol() + " HA GANADO CON UN TOTAL DE "
+                + world.getActual().getMoves() + " MOVIMIENTOS!"+"\033[0m");
         calculateWinner();
     }
 
     public void calculateWinner() {
-        System.out.println("Por favor ingrese su nickname: ");
+        System.out.print("Por favor ingrese su nickname: ");
         String nickname = sc.nextLine();
+        System.out.print("\n");
         if (nickname.equals("")) {
-            System.out.println("Su nickname no puede estar vacio, por favor, vuelva a intentarlo!");
+            System.err.println("Su nickname no puede estar vacio, por favor, vuelva a intentarlo!\n");
             calculateWinner();
         } else {
             world.getActual().setNickname(nickname);
@@ -304,7 +311,7 @@ public class Menu {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Usted podrá ver su puntaje en la opción (2) del menú, muchas gracias por jugar!");
+            System.out.println("************USTED PODRÁ VER SU PUNTAJE EN LA OPCIÓN (2) DEL MENÚ DE INICIO************");
         }
     }
 
@@ -317,6 +324,9 @@ public class Menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.print("\n");
+        System.out.print("\033[035m_____________________________________PUNTAJES DE JUGADORES________________________________________________________\n"+"\033[0m");
+        System.out.print("\n");
         System.out.println("Nombre del jugador " + " Puntaje del jugador");
         w.printWinners();
         System.out.println(w.getMessage());
