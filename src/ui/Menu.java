@@ -290,7 +290,6 @@ public class Menu {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             try {
                 world.saveData();
             } catch (ClassNotFoundException e1) {
@@ -298,7 +297,6 @@ public class Menu {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-
             try {
                 world.loadData();
             } catch (ClassNotFoundException e) {
@@ -306,14 +304,12 @@ public class Menu {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             System.out.println("Usted podrá ver su puntaje en la opción (2) del menú, muchas gracias por jugar!");
         }
     }
 
     public void showLeaderBoard() {
         World w = new World();
-
         try {
             w.loadData();
         } catch (ClassNotFoundException e) {
@@ -321,7 +317,6 @@ public class Menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         System.out.println("Nombre del jugador " + " Puntaje del jugador");
         w.printWinners();
         System.out.println(w.getMessage());

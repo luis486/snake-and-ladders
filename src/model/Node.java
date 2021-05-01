@@ -105,10 +105,6 @@ public class Node {
         return this.players;
     }
 
-    public Boolean isVisible() {
-        return this.visible;
-    }
-
     public Boolean getVisible() {
         return this.visible;
     }

@@ -14,9 +14,9 @@ public class Player implements Serializable {
     private int score;
     private int position;
     private int dice;
-    private boolean isWinner;
-    private char symbol;
     private int lastPosition;
+    private char symbol;
+    private boolean isWinner;
 
     public Player(char symbol, int lastPosition) {
         this.score = 0;
@@ -96,16 +96,16 @@ public class Player implements Serializable {
         return this.postPlayerInNode;
     }
 
+    public void setPostPlayerInNode(Player p) {
+        this.postPlayerInNode = p;
+    }
+
     public int getLastPosition() {
         return this.lastPosition;
     }
 
     public void setLastPosition(int lastPosition) {
         this.lastPosition = lastPosition;
-    }
-
-    public void setPostPlayerInNode(Player p) {
-        this.postPlayerInNode = p;
     }
 
     public int getPosition() {

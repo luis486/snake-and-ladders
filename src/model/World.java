@@ -15,8 +15,8 @@ public class World {
     private int amountSnakes;
     private int amountLadders;
     private int amountPlayers;
-    private boolean visible;
     private int sizeMatrix;
+    private boolean visible;
     private boolean finished;
 
     public World() {
@@ -425,7 +425,6 @@ public class World {
         } else {
             return one;
         }
-
     }
 
     // --------------------------------------------------BINARY-SEARCH-TREE---------------------------------------------
@@ -469,7 +468,7 @@ public class World {
             return;
         } else {
             printWinners(player.getLeft());
-            message += "      " + player.getNickname() + "                    " + player.toString() + "\n";
+            message += "      " + player.getNickname() + "            " + player.toString() + "\n";
             printWinners(player.getRight());
         }
     }
