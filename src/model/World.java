@@ -9,6 +9,7 @@ public class World {
     private Player actual; // Jugador actual al momento
     private Player one; // Lista enlazada de jugadores
     private Player root;
+    private String message = "";
     private int numRows;
     private int numCols;
     private int amountSnakes;
@@ -19,6 +20,7 @@ public class World {
     private boolean finished;
 
     public World() {
+
     }
 
     public World(int n, int m, int as, int al, int ap) {
@@ -96,6 +98,14 @@ public class World {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     // -----------------------------------------PERSISTENCE----------------------------------------------------
@@ -176,7 +186,6 @@ public class World {
 
         }
         return msg;
-
     }
 
     public void matrixEnum(Node firstNode) {
@@ -428,20 +437,19 @@ public class World {
             addWinner(root, player);
         }
         saveData();
+        loadData();
     }
 
     private void addWinner(Player current, Player newWinner) {
         if (newWinner.getScore() >= current.getScore()) {
             if (current.getLeft() == null) {
                 current.setLeft(newWinner);
-                newWinner.setParent(current);
             } else {
                 addWinner(current.getLeft(), newWinner);
             }
         } else {
             if (current.getRight() == null) {
                 current.setRight(newWinner);
-                newWinner.setParent(current);
             } else {
                 addWinner(current.getRight(), newWinner);
             }
@@ -452,7 +460,7 @@ public class World {
         if (root != null) {
             printWinners(root);
         } else {
-            System.out.println("No hay jugadores aún!");
+            message = "No hay jugadores aún!";
         }
     }
 
@@ -461,7 +469,7 @@ public class World {
             return;
         } else {
             printWinners(player.getLeft());
-            System.out.println(player.toString());
+            message += "      " + player.getNickname() + "                    " + player.toString() + "\n";
             printWinners(player.getRight());
         }
     }

@@ -10,7 +10,8 @@ public class Menu {
 
     private static final String SPACE = " ";
     private World world;
-    private boolean centinela = false;
+
+    // -----------------------------------------------------MENU-METHODS------------------------------------------
 
     public void showMenu() {
         System.out.println(
@@ -46,6 +47,38 @@ public class Menu {
         }
     }
 
+    public void doOperation(int option) {
+        switch (option) {
+            case 1:
+                createGame();
+                break;
+            case 2:
+                showLeaderBoard();
+                break;
+            default:
+                System.out.println("Error, opcion invalida, por favor digite otra opcion");
+        }
+    }
+
+    public int readOption() {
+        int option = sc.nextInt();
+        sc.nextLine();
+        return option;
+    }
+
+    public void startProgram() {
+        showMenu();
+        int option = readOption();
+        if (option == 3) {
+            System.out.println("Gracias por usar esta aplicacion");
+        } else {
+            doOperation(option);
+            startProgram();
+        }
+    }
+
+    // ------------------------------------------------------MANUALLY-PLAYERS--------------------------------------
+
     public void chooseManually() {
         System.out.print("\nPor favor indique los parametros del juego de la siguiente manera: " + "\n"
                 + "\nEn una misma línea separado con espacios pondra el numero de filas, de columnas,"
@@ -68,13 +101,34 @@ public class Menu {
                     "La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
             chooseManually();
         } else {
-            createWorldOne(parts);
+            createWorldManually(parts);
         }
         assignManually(parts[4], 0);
         System.out.println(world);
         initializeGame(false);
-
     }
+
+    public void assignManually(String parameters, int contador) {
+        if (contador < parameters.length()) {
+            world.addPlayer(parameters.charAt(contador));
+            assignManually(parameters, contador + 1);
+        }
+    }
+
+    public void createWorldManually(String[] parameters) {
+        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
+                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
+
+        try {
+            world.loadData();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ---------------------------------------------AUTOMATIC-PLAYERS-----------------------------------------
 
     public void generateAutomatic() {
         System.out.print("\nPor favor indique los parametros del juego de la siguiente manera: " + "\n"
@@ -104,107 +158,17 @@ public class Menu {
                     "La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
             generateAutomatic();
         } else {
-            createWorldTwo(parts);
+            createWorldAutomatic(parts);
         }
         assignAutomatic(Integer.parseInt(parts[4]), 0);
         System.out.println(world);
         initializeGame(false);
     }
 
-    public void createWorldOne(String[] parameters) {
-        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
-                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
-    }
-
-    public void createWorldTwo(String[] parameters) {
-        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
-                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
-
-    }
-
-    public void assignManually(String parameters, int contador) {
-        if (contador < parameters.length()) {
-            world.addPlayer(parameters.charAt(contador));
-            assignManually(parameters, contador + 1);
-        }
-
-    }
-
-    public void gameSimulation() {
-        if (!world.getFinished()) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(world.generateDice());
-            System.out.println(world);
-            gameSimulation();
-
-        } else {
-            showWinner();
-        }
-    }
-
     public void assignAutomatic(int amount, int contador) {
         if (contador < amount) {
             world.addPlayer(generateRandom(contador + 1));
             assignAutomatic(amount, contador + 1);
-        }
-    }
-
-    public void initializeGame(boolean render) {
-        if (render == false) {
-            System.out.println("Por favor ingrese un salto de línea (enter) para continuar");
-            String jump = sc.nextLine();
-            if (jump.equals("")) {
-                System.out.println(world.generateDice());
-                world.setVisible(false);
-                System.out.println(world);
-                initializeGame(world.getFinished());
-            } else if (jump.equals("simul")) {
-                centinela = true;
-                gameSimulation();
-                centinela = false;
-            } else if (jump.equals("menu")) {
-                System.out.println("Usted ha elegido devolverse al menu principal, gracias por jugar");
-                return;
-            } else if (jump.equals("num")) {
-                world.setVisible(true);
-                System.out.println(world);
-                initializeGame(render);
-            } else {
-                System.out.println("El salto de línea debe estar vacío!");
-                initializeGame(render);
-            }
-        } else {
-            showWinner();
-        }
-    }
-
-    public void showWinner() {
-        System.out.println("El jugador " + world.getActual().getSymbol() + " ha ganado con un total de "
-                + world.getActual().getMoves() + " movimientos!");
-        calculateWinner();
-    }
-
-    public void calculateWinner() {
-        System.out.println("Por favor ingrese su nickname: ");
-        String nickname = sc.nextLine();
-        if (nickname.equals("")) {
-            System.out.println("Su nickname no puede estar vacio, por favor, vuelva a intentarlo!");
-            calculateWinner();
-        } else {
-            world.getActual().setNickname(nickname);
-            try {
-                world.addWinner(world.getActual());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Usted podrá ver su puntaje en la opción (2) del menú, muchas gracias por jugar!");
-
         }
     }
 
@@ -242,26 +206,9 @@ public class Menu {
         return car;
     }
 
-    public void doOperation(int option) {
-        switch (option) {
-            case 1:
-                createGame();
-                break;
-            case 2:
-
-                break;
-            default:
-                System.out.println("Error, opcion invalida, por favor digite otra opcion");
-        }
-    }
-
-    public int readOption() {
-        int option = sc.nextInt();
-        sc.nextLine();
-        return option;
-    }
-
-    public void showLeaderBoard() {
+    public void createWorldAutomatic(String[] parameters) {
+        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
+                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
         try {
             world.loadData();
         } catch (ClassNotFoundException e) {
@@ -269,19 +216,117 @@ public class Menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    public void startProgram() {
-        if (centinela == false) {
-            showMenu();
-            int option = readOption();
-            if (option == 3) {
-                System.out.println("Gracias por usar esta aplicacion");
-            } else {
-                doOperation(option);
-                startProgram();
+    // ----------------------------------GAME-SIMULATION-------------------------------------------------------
+
+    public void gameSimulation() {
+        if (!world.getFinished()) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            System.out.println(world.generateDice());
+            System.out.println(world);
+            gameSimulation();
+
+        } else {
+            showWinner();
         }
     }
+
+    // ---------------------------------------------GAME-INITIALIZE--------------------------------------------
+
+    public void initializeGame(boolean render) {
+        if (render == false) {
+            System.out.println("Por favor ingrese un salto de línea (enter) para continuar");
+            String jump = sc.nextLine();
+            if (jump.equals("")) {
+                System.out.println(world.generateDice());
+                world.setVisible(false);
+                System.out.println(world);
+                initializeGame(world.getFinished());
+            } else if (jump.equals("simul")) {
+
+                gameSimulation();
+
+            } else if (jump.equals("menu")) {
+                System.out.println("Usted ha elegido devolverse al menu principal, gracias por jugar");
+                return;
+            } else if (jump.equals("num")) {
+                world.setVisible(true);
+                System.out.println(world);
+                initializeGame(render);
+            } else {
+                System.out.println("El salto de línea debe estar vacío!");
+                initializeGame(render);
+            }
+        } else {
+            showWinner();
+        }
+    }
+
+    // -------------------------------------------------WINNERS---------------------------------------------------
+
+    public void showWinner() {
+        System.out.println("El jugador " + world.getActual().getSymbol() + " ha ganado con un total de "
+                + world.getActual().getMoves() + " movimientos!");
+        calculateWinner();
+    }
+
+    public void calculateWinner() {
+        System.out.println("Por favor ingrese su nickname: ");
+        String nickname = sc.nextLine();
+        if (nickname.equals("")) {
+            System.out.println("Su nickname no puede estar vacio, por favor, vuelva a intentarlo!");
+            calculateWinner();
+        } else {
+            world.getActual().setNickname(nickname);
+            try {
+                world.addWinner(world.getActual());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                world.saveData();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+            try {
+                world.loadData();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("Usted podrá ver su puntaje en la opción (2) del menú, muchas gracias por jugar!");
+        }
+    }
+
+    public void showLeaderBoard() {
+        World w = new World();
+
+        try {
+            w.loadData();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Nombre del jugador " + " Puntaje del jugador");
+        w.printWinners();
+        System.out.println(w.getMessage());
+        w.setMessage("");
+
+    }
+
 }

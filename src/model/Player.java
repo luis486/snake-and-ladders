@@ -24,6 +24,7 @@ public class Player implements Serializable {
         this.moves = 0;
         this.position = 1;
         this.isWinner = false;
+        this.nickname = "";
         this.lastPosition = lastPosition;
     }
 
