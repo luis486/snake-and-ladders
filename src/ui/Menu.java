@@ -13,15 +13,22 @@ public class Menu {
 
     // -----------------------------------------------------MENU-METHODS------------------------------------------
 
+    /**
+     * Method name: showMenu.
+     * Pos: the desired option by the user is successfully chosen.
+     */
     public void showMenu() {
         System.out.println("\033[035m___________________________________________Bienvenido a su menu de confianza________________________________________________________\n"+"\033[0m");
-        System.out.print("\nPor favor digite una opcion" + "\n" + "\n(1) Quiero jugar Snake and Ladders!"
-                + "\n(2) Deseo ver el tablero de posiciones" + "\n(3) Deseo salir" + "\nEscriba aqui: ");
+        System.out.print("\nPor favor digite una opcion" + "\n" + "\n(1) Quiero jugar Snake and Ladders!"+ "\n(2) Deseo ver el tablero de posiciones" + "\n(3) Deseo salir" + "\nEscriba aqui: ");
     }
 
+    /**
+     * Method name: createGame.
+     * Pre: The option variable must be successfully assigned to operate with the switch sequence of the selection of players.
+     * Pos: The desired option by the user is successfully chosen.
+     */
     public void createGame() {
-        System.out.print("\n¿Cual opcion escojeras?" + "\n" + "\n(1) Quiero escoger los simbolos jugadores"
-                + "\n(2) Prefiero que se escojan aleatoriamente" + "\nEscriba aqui: ");
+        System.out.print("\n¿Cual opcion escojeras?" + "\n" + "\n(1) Quiero escoger los simbolos jugadores"+ "\n(2) Prefiero que se escojan aleatoriamente" + "\nEscriba aqui: ");
         int option = sc.nextInt();
         sc.nextLine();
         switch (option) {
@@ -40,6 +47,12 @@ public class Menu {
         }
     }
 
+    /**
+     *Method name: doOperation.
+     * Pre: The operation variable must have the value entered by the user correctly assigned; option must be different from null or empty
+     * Pos: The method corresponding to the number sent by parameter is executed correctly
+     * @param option 
+     */
     public void doOperation(int option) {
         switch (option) {
             case 1:
@@ -50,18 +63,29 @@ public class Menu {
                 break;
             default:
                 System.out.print("\n");
-                System.err.println("La opcion ingresada es invalida, por favor elija opcion que se le pide");
+                System.err.println("La opcion ingresada es invalida, por favor elija la opcion que se le pide");
                 System.out.print("\n");
                 break;
         }
     }
 
+    /**
+     *Method name: readOption.
+     * Pre: Read the requested number in the game options menu
+     * Pos: Stores the read value in an int variable and returns it
+     * @return option
+     */
     public int readOption() {
         int option = sc.nextInt();
         sc.nextLine();
         return option;
     }
 
+    /**
+     *Method name: startProgram.
+     * Pre: Calls the showMenu method and reads the option that the user entered by calling the readOption method and successfully stores it in an int variable
+     * Pos: Depending on the option that the user entered, the method corresponding to the number is called or an error message is thrown if the option is not in the menu
+     */
     public void startProgram() {
         showMenu();
         int option = readOption();
@@ -77,6 +101,11 @@ public class Menu {
 
     // ------------------------------------------------------MANUALLY-PLAYERS--------------------------------------
 
+    /**
+     *Method name: chooseManually.
+     * Pre: If the user decides to choose the option of choosing the participants manually, it is asked for the corresponding parameters in a messageCalls the showMenu method and reads the option that the user entered by calling the readOption method and successfully stores it in an int variable
+     * Pos: The game board is immediately generated with the parameters that the user previously entered if not, a message is sent as to why the board was not generated
+     */
     public void chooseManually() {
         System.out.print("\nPor favor indique los parametros del juego de la siguiente manera: " + "\n"
                 + "\nEn una misma línea separado con espacios pondra el numero de filas, de columnas,"
@@ -107,16 +136,28 @@ public class Menu {
         initializeGame(false);
     }
 
-    public void assignManually(String parameters, int contador) {
-        if (contador < parameters.length()) {
-            world.addPlayer(parameters.charAt(contador));
-            assignManually(parameters, contador + 1);
+    /**
+     *Method name: assignManually.
+     * Pre: The participants must be added in an array of Strings and the counter must be started at 0 before passing to the assignManually method as a parameters; parameters and count must be different from null or empty
+     * Pos: Symbols are successfully assigned to players
+     * @param parameters
+     * @param counter
+     */
+    public void assignManually(String parameters, int counter) {
+        if (counter < parameters.length()) {
+            world.addPlayer(parameters.charAt(counter));
+            assignManually(parameters, counter + 1);
         }
     }
 
+    /**
+     *Method name: createWorldManually.
+     * Pre: Each parameter requested at the beginning of the chooseManually method is stored in a Strings position of the parameters array except the participants; parameters must be different from null or empty
+     * Pos: The current game match is successfully created
+     * @param parameters
+     */
     public void createWorldManually(String[] parameters) {
-        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
-                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
+        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
 
         try {
             world.loadData();
@@ -129,6 +170,11 @@ public class Menu {
 
     // ---------------------------------------------AUTOMATIC-PLAYERS-----------------------------------------
 
+    /**
+     *Method name: generateAutomatic.
+     * Pre: If the user decides to choose the option of choosing the participants automatic, it is asked for the corresponding parameters in a messageCalls the showMenu method and reads the option that the user entered by calling the readOption method and successfully stores it in an int variable
+     * Pos: The game board is immediately generated with the parameters that the user previously entered if not, a message is sent as to why the board was not generated
+     */
     public void generateAutomatic() {
         System.out.print("\nPor favor indique los parametros del juego de la siguiente manera: " + "\n"
                 + "\nEn una misma línea separado con espacios pondra el numero de filas, de columnas,"
@@ -165,13 +211,27 @@ public class Menu {
         initializeGame(false);
     }
 
-    public void assignAutomatic(int amount, int contador) {
-        if (contador < amount) {
-            world.addPlayer(generateRandom(contador + 1));
-            assignAutomatic(amount, contador + 1);
+    /**
+     *Method name: assignAutomatic.
+     * Pre: The amount participants must be added in an int variable and the counter must be started at 0 before passing to the assignAutomatic method as a parameters; amount and count must be different from null or empty
+     * Pos: Symbols are successfully assigned to players
+     * @param amount
+     * @param counter
+     */
+    public void assignAutomatic(int amount, int counter) {
+        if (counter < amount) {
+            world.addPlayer(generateRandom(counter + 1));
+            assignAutomatic(amount, counter + 1);
         }
     }
 
+    /**
+     *Method name: generateRandom.
+     * Pre: The option variable is assigned the value to choose the symbol; option must be different from null or empty
+     * Pos: The symbol is chosen successfully according to the value sent by parameter, the value is returned
+     * @param option
+     * @return option
+     */
     public char generateRandom(int option) {
         char car = ' ';
         switch (option) {
@@ -206,9 +266,14 @@ public class Menu {
         return car;
     }
 
+    /**
+     *Method name: createWorldAutomatic.
+     * Pre: Each parameter requested at the beginning of the chooseManually method is stored in a Strings position of the parameters array except the participants; parameters must be different from null or empty
+     * Pos: The current game match is successfully created
+     * @param parameters
+     */
     public void createWorldAutomatic(String[] parameters) {
-        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
-                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
+        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
         try {
             world.loadData();
         } catch (ClassNotFoundException e) {
@@ -220,6 +285,10 @@ public class Menu {
 
     // ----------------------------------GAME-SIMULATION-------------------------------------------------------
 
+    /**
+     *Method name: gameSimulation.
+     * Pos: The simulation of the current game board is generated step by step until reaching the end and showing the winner
+     */
     public void gameSimulation() {
         if (!world.getFinished()) {
             try {
@@ -238,6 +307,12 @@ public class Menu {
 
     // ---------------------------------------------GAME-INITIALIZE--------------------------------------------
 
+    /**
+     *Method name: initializeGame.
+     * Pre: The render boolean variable must be false to start the board game
+     * Pos: 4 results can be displayed depending on the type of user (simul, menu, enum or another different writing): simulation of the game, return to the start menu, see the numbered board or an error message because it does not correspond to any of the above . When the render variable becomes true it means that there is a winner and it is shown
+     * @param render
+     */
     public void initializeGame(boolean render) {
         if (render == false) {
             System.out.println("\033[036mPor favor ingrese un salto de línea (enter) para continuar"+"\033[0m");
@@ -252,10 +327,8 @@ public class Menu {
                 System.out.println("************USTED ESTA EN UNA SIMULACION DEL JUEGO ACTUAL************");
                 System.out.println("\n");
                 gameSimulation();
-
             } else if (jump.equalsIgnoreCase("menu")) {
                 System.out.println("Usted ha elegido devolverse al menu principal, gracias por jugar");
-                return;
             } else if (jump.equalsIgnoreCase("num")) {
                 System.out.print("\n");
                 System.out.println("************TABLERO ENUMERADO************");
@@ -275,12 +348,20 @@ public class Menu {
 
     // -------------------------------------------------WINNERS---------------------------------------------------
 
+    /**
+     *Method name: showWinner.
+     * Pos: A message is displayed with the winner of the current game
+     */
     public void showWinner() {
-        System.out.println("\033[032m¡EL JUGADOR " + world.getActual().getSymbol() + " HA GANADO CON UN TOTAL DE "
-                + world.getActual().getMoves() + " MOVIMIENTOS!"+"\033[0m");
+        System.out.println("\033[032m¡EL JUGADOR " + world.getActual().getSymbol() + " HA GANADO CON UN TOTAL DE "+ world.getActual().getMoves() + " MOVIMIENTOS!"+"\033[0m");
         calculateWinner();
     }
 
+    /**
+     *Method name: calculateWinner.
+     * Pre: It asked to the user in the calculateWinner method to enter the winner's nickname and this is assigned to the nickname String variable. nickname must be different from null or empty
+     * Pos: The winner is successfully saved in the database if not, a message is displayed that it could have happened.
+     */
     public void calculateWinner() {
         System.out.print("Por favor ingrese su nickname: ");
         String nickname = sc.nextLine();
@@ -315,6 +396,10 @@ public class Menu {
         }
     }
 
+    /**
+     *Method name: showLeaderBoard.
+     * Pos: The ranking of the winners of different games is shown
+     */
     public void showLeaderBoard() {
         World w = new World();
         try {
@@ -331,7 +416,5 @@ public class Menu {
         w.printWinners();
         System.out.println(w.getMessage());
         w.setMessage("");
-
     }
-
 }
