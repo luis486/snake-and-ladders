@@ -64,7 +64,7 @@ public class Ladders {
     }
 
     /**
-     * Method name: setStart.
+     * Method name: setEnd.
      * Pre: The end node variable is the end of the ladder that will have; end must be different from null or empty
      * Pos: Returns the initial node of the ladder
      * @param end
