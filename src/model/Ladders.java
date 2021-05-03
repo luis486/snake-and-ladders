@@ -46,8 +46,8 @@ public class Ladders {
 
     /**
      * Method name: setStart.
-     * Pre: The start node variable is the beginning of the ladder that will have; start must be different from null or empty
-     * Pos: Returns the initial node of the ladder
+     * Pre: The start node variable is the beginning of the ladder that it will have; start must be different from null or empty
+     * Pos: The previous start node of the ladder is changed to the new one
      * @param start
      */
     public void setStart(Node start) {
@@ -66,7 +66,7 @@ public class Ladders {
     /**
      * Method name: setEnd.
      * Pre: The end node variable is the end of the ladder that will have; end must be different from null or empty
-     * Pos: Returns the initial node of the ladder
+     * Pos: The previous end node of the ladder is changed to the new one
      * @param end
      */
     public void setEnd(Node end) {
@@ -76,7 +76,7 @@ public class Ladders {
     /**
      * Method name: toString.
      * Pos: The total amount of stairs that the game will have is returned
-     * @return number
+     * @return toString
      */
     @Override
     public String toString() {
