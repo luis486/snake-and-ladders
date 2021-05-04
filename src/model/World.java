@@ -164,7 +164,7 @@ public class World {
     }
 
     /**
-     * Method name: setNumber.
+     * Method name: setFinished.
      * Pre: The finished boolean variable is the new condition to finish or not the current game board; finished must be different from null or empty
      * Pos: The previous finished is changed to the new one
      * @param finished
@@ -252,7 +252,7 @@ public class World {
     }
 
     /**
-     * Method name: createWorld.
+     * Method name: createRow.
      * Pre: The i int variable it will create the table row; i must be different from null or empty
      * Pre: The j int variable it will create the complete column of the row; j must be different from null or empty
      * Pre: The firstRow Node variable it will be made a double link of the top and bottom; firstRow must be different from null or empty
@@ -272,7 +272,7 @@ public class World {
     }
 
     /**
-     * Method name: createWorld.
+     * Method name: createCol.
      * Pre: The i int variable it will identify the table row; i must be different from null or empty
      * Pre: The j int variable it will create the complete column of the row; j must be different from null or empty
      * Pre: The left Node variable is in charge of making the respective links of the current square; left must be different from null or empty
@@ -327,7 +327,7 @@ public class World {
     }
 
     /**
-     * Method name: printRow.
+     * Method name: printCol.
      * Pre: The current Node variable bring the location of the column node to be displayed in the matrix; current must be different from null or empty
      * Pos: Returns a message with the visualization of the row
      * @param current
@@ -491,7 +491,7 @@ public class World {
     // ----------------------------------------VALIDATION-SNAKE-AND-LADDERS-----------------------------------
 
     /**
-     * Method name: validateLadders.
+     * Method name: validateSnakesOrLadders.
      * Pre: The after Node variable is the node that will be used to validate if there is a ladder or snake located; after must be different from null or empty
      * Pos: The node is returned with the validation
      * @param after
@@ -706,8 +706,8 @@ public class World {
     }
 
     /**
-     * Method name: setInBox.
-     * Pre: The before Node variable is the node that will be used to position the player before the player who rolled the dice and advanced on the board; current must be different from null or empty
+     * Method name: setNodeBefore.
+     * Pre: The before Node variable is the node that will be used to position the player before the player who rolled the dice and advanced on the board; before must be different from null or empty
      * Pos: The before player is successfully placed in the corresponding square
      * @param before
      */
@@ -778,7 +778,7 @@ public class World {
     }
 
     /**
-     * Method name: printRow.
+     * Method name: printWinners.
      * Pre: To show the winners there must be at least one winner; root must be different from null or empty
      * Pos: A message is displayed with the current winners, if there is not a winner, an error message is sent
      */

@@ -18,8 +18,8 @@ public class Menu {
      * Pos: the desired option by the user is successfully chosen.
      */
     public void showMenu() {
-        System.out.println("\033[035m___________________________________________Bienvenido a su menu de confianza________________________________________________________\n"+"\033[0m");
-        System.out.print("\nPor favor digite una opcion" + "\n" + "\n(1) Quiero jugar Snake and Ladders!"+ "\n(2) Deseo ver el tablero de posiciones" + "\n(3) Deseo salir" + "\nEscriba aqui: ");
+        System.out.println("\033[035m___________________________________________BIENVENIDO AL MENÚ DE SERPIENTES Y ESCALERAS___________________________________________\n"+"\033[0m");
+        System.out.print("\n¿Qué quieres hacer el día de hoy?" + "\n" + "\n(1) Quiero jugar Snake and Ladders!"+ "\n(2) Deseo ver el tablero de posiciones" + "\n(3) Deseo salir" + "\nEscriba aqui: ");
     }
 
     /**
@@ -34,13 +34,13 @@ public class Menu {
         switch (option) {
             case 1:
                 System.out.print("\n");
-                System.out.print("\033[035m_____________________________________JUGADORES MANUALES___________________________________________________\n"+"\033[0m");
+                System.out.print("\033[035m___________________________________________JUGADORES MANUALES___________________________________________\n"+"\033[0m");
                 chooseManually();
                 System.out.print("\n");
                 break;
             case 2:
                 System.out.print("\n");
-                System.out.print("\033[035m_____________________________________JUGADORES ALEATORIOS___________________________________________________\n"+"\033[0m");
+                System.out.print("\033[035m___________________________________________JUGADORES ALEATORIOS___________________________________________\n"+"\033[0m");
                 generateAutomatic();
                 System.out.print("\n");
                 break;
@@ -91,7 +91,7 @@ public class Menu {
         int option = readOption();
         if (option == 3) {
             System.out.print("\n");
-            System.out.print("\033[035m_____________________________________APLICACION CERRADA________________________________________________________\n"+"\033[0m");
+            System.out.print("\033[035m___________________________________________APLICACION CERRADA___________________________________________\n"+"\033[0m");
             System.out.print("\n");
         } else {
             doOperation(option);
@@ -128,7 +128,7 @@ public class Menu {
             chooseManually();
         } else {
             System.out.println("\n");
-            System.out.println("************TABLERO GENERADO POR LOS PARAMETROS ANTERIORMENTE PEDIDOS**********");
+            System.out.println("*********************TABLERO GENERADO POR LOS PARAMETROS ANTERIORMENTE PEDIDOS*********************");
             createWorldManually(parts);
         }
         assignManually(parts[4], 0);
@@ -203,7 +203,7 @@ public class Menu {
             generateAutomatic();
         } else {
             System.out.println("\n");
-            System.out.println("************TABLERO GENERADO POR LOS PARAMETROS ANTERIORMENTE PEDIDOS**********");
+            System.out.println("*********************TABLERO GENERADO POR LOS PARAMETROS ANTERIORMENTE PEDIDOS*********************");
             createWorldAutomatic(parts);
         }
         assignAutomatic(Integer.parseInt(parts[4]), 0);
@@ -236,31 +236,31 @@ public class Menu {
         char car = ' ';
         switch (option) {
             case 1:
-                car = '#';
+                car = '♕';
                 break;
             case 2:
-                car = '$';
+                car = '☠';
                 break;
             case 3:
-                car = '%';
+                car = '☺';
                 break;
             case 4:
-                car = '&';
+                car = '❤';
                 break;
             case 5:
-                car = '/';
+                car = '✚';
                 break;
             case 6:
-                car = '(';
+                car = '♘';
                 break;
             case 7:
-                car = ')';
+                car = '✹';
                 break;
             case 8:
-                car = '.';
+                car = '☯';
                 break;
             case 9:
-                car = '*';
+                car = '✪';
                 break;
         }
         return car;
@@ -324,14 +324,14 @@ public class Menu {
                 initializeGame(world.getFinished());
             } else if (jump.equalsIgnoreCase("simul")) {
                 System.out.println("\n");
-                System.out.println("************USTED ESTA EN UNA SIMULACION DEL JUEGO ACTUAL************");
+                System.out.println("*********************USTED ESTA EN UNA SIMULACION DEL JUEGO ACTUAL*********************");
                 System.out.println("\n");
                 gameSimulation();
             } else if (jump.equalsIgnoreCase("menu")) {
                 System.out.println("Usted ha elegido devolverse al menu principal, gracias por jugar");
             } else if (jump.equalsIgnoreCase("num")) {
                 System.out.print("\n");
-                System.out.println("************TABLERO ENUMERADO************");
+                System.out.println("*********************TABLERO ENUMERADO*********************");
                 world.setVisible(true);
                 System.out.println(world);
                 initializeGame(render);
@@ -392,7 +392,8 @@ public class Menu {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("************USTED PODRÁ VER SU PUNTAJE EN LA OPCIÓN (2) DEL MENÚ DE INICIO************");
+             System.out.println("\033[032mGanador guardado exitosamente\n"+"\033[0m");
+            System.out.println("*********************USTED PODRÁ VER SU PUNTAJE EN LA OPCIÓN (2) DEL MENÚ DE INICIO*********************");
         }
     }
 
@@ -410,7 +411,7 @@ public class Menu {
             e.printStackTrace();
         }
         System.out.print("\n");
-        System.out.print("\033[035m_____________________________________PUNTAJES DE JUGADORES________________________________________________________\n"+"\033[0m");
+        System.out.print("\033[035m___________________________________________PUNTAJES DE JUGADORES___________________________________________\n"+"\033[0m");
         System.out.print("\n");
         System.out.println("Nombre del jugador " + " Puntaje del jugador");
         w.printWinners();

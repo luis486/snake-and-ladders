@@ -199,7 +199,7 @@ public class Player implements Serializable {
 
     /**
      * Method name: setPostPlayerInNode.
-     * Pre: The p Player variable is the player node who will be to the next of another player in the current game board; postPlayer must be different from null or empty
+     * Pre: The p Player variable is the player node who will be to the next of another player in the current game board; p must be different from null or empty
      * Pos: The previous player of the postPlayer side of the node is changed to the new one
      * @param p
      */
@@ -217,7 +217,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * Method name: setPostPlayerInNode.
+     * Method name: setLastPosition.
      * Pre: The lastPosition int variable is the player last position that will have in the current game board; lastPosition must be different from null or empty
      * Pos: The previous player last position is changed to the new one
      * @param lastPosition
@@ -237,7 +237,7 @@ public class Player implements Serializable {
 
     /**
      * Method name: setPosition.
-     * Pre: The position int variable is the player last position that the player will have in the current game board; lastPosition must be different from null or empty
+     * Pre: The position int variable is the player last position that the player will have in the current game board; position must be different from null or empty
      * Pos: The previous player last position is changed to the new one
      * @param position
      */
@@ -286,7 +286,7 @@ public class Player implements Serializable {
 
     /**
      * Method name: dice.
-     * Pre: The dice int variable is the number that is sent by parameter to allow the player to continue to the other square; dice must be different from null or empty
+     * Pre: The d int variable is the number that is sent by parameter to allow the player to continue to the other square; d must be different from null or empty
      * Pos: The player is successfully assigned the number to advance one square
      * @param d
      */
@@ -314,7 +314,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * Method name: winner.
+     * Method name: getPartner.
      * Pre: The first Player variable it means if the next player that is sent by parameter is the next  to participate on the current game; first must be different from null or empty
      * Pre: The msg String variable will show the symbols that will appear on the current boarda game; msg must be different from null or empty
      * Pos: You have the symbol of the current player who is playing

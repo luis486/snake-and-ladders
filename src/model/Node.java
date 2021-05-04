@@ -244,7 +244,7 @@ public class Node {
 
     /**
      * Method name: setPlayers.
-     * Pre: The p Player variable is the new player that the game will have in the current game board; visible must be different from null or empty
+     * Pre: The p Player variable is the new player that the game will have in the current game board; p must be different from null or empty
      * Pos: The previous p is changed to the new one
      * @param p
      */
@@ -255,7 +255,7 @@ public class Node {
     /**
      * Method name: toString.
      * Pos: A message is displayed with the current game board with the requested attributes (players, ladders, snakes, and the identification of the node)
-     * @return toString
+     * @return msg
      */
     @Override
     public String toString() {
