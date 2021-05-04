@@ -63,7 +63,7 @@ public class Menu {
                 break;
             default:
                 System.out.print("\n");
-                System.err.println("La opcion ingresada es invalida, por favor elija la opcion que se le pide");
+                System.err.println("La opcion ingresada es inválida, por favor elija la opcion que se le pide");
                 System.out.print("\n");
                 break;
         }
