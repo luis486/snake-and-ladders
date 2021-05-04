@@ -28,7 +28,7 @@ public class Menu {
      * Pos: The desired option by the user is successfully chosen.
      */
     public void createGame() {
-        System.out.print("\n¿Cual opcion escojeras?" + "\n" + "\n(1) Quiero escoger los simbolos jugadores"+ "\n(2) Prefiero que se escojan aleatoriamente" + "\nEscriba aqui: ");
+        System.out.print("\n¿Cual opción escojeras?" + "\n" + "\n(1) Quiero escoger los simbolos jugadores"+ "\n(2) Prefiero que se escojan aleatoriamente" + "\nEscriba aqui: ");
         int option = sc.nextInt();
         sc.nextLine();
         switch (option) {
