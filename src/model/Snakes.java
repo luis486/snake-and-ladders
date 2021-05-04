@@ -8,9 +8,9 @@ public class Snakes {
 
     /**
      * Method name: Snakes.
-     * Pre: The letter char variable is a letter that the snake have in the current game board; letter must be different from null or empty
+     * Pre: letter must be different from null or empty
      * Pos: The snakes is created correctly
-     * @param letter
+     * @param letter The letter char variable is a letter that the snake have in the current game board
      */
     public Snakes(char letter) {
         this.letter = letter;
@@ -27,9 +27,9 @@ public class Snakes {
 
     /**
      * Method name: setLetter.
-     * Pre: The letter char variable is the letter that the snake will have in the node; letter must be different from null or empty
+     * Pre: letter must be different from null or empty
      * Pos: The previous letter of the snake is changed to the new one
-     * @param letter
+     * @param letter The letter char variable is the letter that the snake will have in the node
      */
     public void setLetter(char letter) {
         this.letter = letter;
@@ -46,9 +46,9 @@ public class Snakes {
 
     /**
      * Method name: setStart.
-     * Pre: The start node variable is the beginning of the snake that it will have; start must be different from null or empty
+     * Pre: start must be different from null or empty
      * Pos: The previous start node of the snake is changed to the new one
-     * @param start
+     * @param start The start node variable is the beginning of the snake that it will have
      */
     public void setStart(Node start) {
         this.start = start;
@@ -65,9 +65,9 @@ public class Snakes {
 
     /**
      * Method name: setEnd.
-     * Pre: The end node variable of the snake that it will have; end must be different from null or empty
+     * Pre: end must be different from null or empty
      * Pos: The previous end node of the snake is changed to the new one
-     * @param end
+     * @param end The end node variable of the snake that it will have
      */
     public void setEnd(Node end) {
         this.end = end;

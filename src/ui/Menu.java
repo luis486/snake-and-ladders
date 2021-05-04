@@ -49,9 +49,9 @@ public class Menu {
 
     /**
      *Method name: doOperation.
-     * Pre: The operation variable must have the value entered by the user correctly assigned; option must be different from null or empty
+     * Pre: option must be different from null or empty
      * Pos: The method corresponding to the number sent by parameter is executed correctly
-     * @param option 
+     * @param option The operation variable must have the value entered by the user correctly assigned
      */
     public void doOperation(int option) {
         switch (option) {
@@ -140,8 +140,8 @@ public class Menu {
      *Method name: assignManually.
      * Pre: The participants must be added in an array of Strings and the counter must be started at 0 before passing to the assignManually method as a parameters; parameters and count must be different from null or empty
      * Pos: Symbols are successfully assigned to players
-     * @param parameters
-     * @param counter
+     * @param parameters array where the players are
+     * @param counter counter that manages the number of players that the game will have
      */
     public void assignManually(String parameters, int counter) {
         if (counter < parameters.length()) {
@@ -154,7 +154,7 @@ public class Menu {
      *Method name: createWorldManually.
      * Pre: Each parameter requested at the beginning of the chooseManually method is stored in a Strings position of the parameters array except the participants; parameters must be different from null or empty
      * Pos: The current game match is successfully created
-     * @param parameters
+     * @param parameters is located the parameters that were requested to the user at startup
      */
     public void createWorldManually(String[] parameters) {
         world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
@@ -215,8 +215,8 @@ public class Menu {
      *Method name: assignAutomatic.
      * Pre: The amount participants must be added in an int variable and the counter must be started at 0 before passing to the assignAutomatic method as a parameters; amount and count must be different from null or empty
      * Pos: Symbols are successfully assigned to players
-     * @param amount
-     * @param counter
+     * @param amount maximum number of participants that the game will have
+     * @param counter counter that manages the number of players that the game will have
      */
     public void assignAutomatic(int amount, int counter) {
         if (counter < amount) {
@@ -229,7 +229,7 @@ public class Menu {
      *Method name: generateRandom.
      * Pre: The option variable is assigned the value to choose the symbol; option must be different from null or empty
      * Pos: The symbol is chosen successfully according to the value sent by parameter, the value is returned
-     * @param option
+     * @param option The option is the number of the symbol that the player will play when choosing the option to randomly generate participants at the start of the program
      * @return option
      */
     public char generateRandom(int option) {
@@ -270,7 +270,7 @@ public class Menu {
      *Method name: createWorldAutomatic.
      * Pre: Each parameter requested at the beginning of the chooseManually method is stored in a Strings position of the parameters array except the participants; parameters must be different from null or empty
      * Pos: The current game match is successfully created
-     * @param parameters
+     * @param parameters is located the parameters that were requested to the user at startup
      */
     public void createWorldAutomatic(String[] parameters) {
         world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
@@ -311,7 +311,7 @@ public class Menu {
      *Method name: initializeGame.
      * Pre: The render boolean variable must be false to start the board game
      * Pos: 4 results can be displayed depending on the type of user (simul, menu, enum or another different writing): simulation of the game, return to the start menu, see the numbered board or an error message because it does not correspond to any of the above . When the render variable becomes true it means that there is a winner and it is shown
-     * @param render
+     * @param render It is the option that shows or not the listed board
      */
     public void initializeGame(boolean render) {
         if (render == false) {

@@ -17,13 +17,13 @@ public class Node {
 
     /**
      * Method name: Node.
-     * Pre: The r int variable is the amount of the rows that the current game board will have; r must be different from null or empty
-     * Pre: The c int variable is the amount of the columns that the current game board will have; c must be different from null or empty
-     * Pre: The id int variable is the identification that the node will have in the current game board; id must be different from null or empty
+     * Pre: r must be different from null or empty
+     * Pre: c must be different from null or empty
+     * Pre: id must be different from null or empty
      * Pos: The node is created correctly
-     * @param r
-     * @param c
-     * @param id
+     * @param r  The r int variable is the amount of the rows that the current game board will have
+     * @param c The c int variable is the amount of the columns that the current game board will have
+     * @param id The id int variable is the identification that the node will have in the current game board
      */
     public Node(int r, int c, int id) {
         this.row = r;
@@ -44,9 +44,9 @@ public class Node {
 
     /**
      * Method name: setSnake.
-     * Pre: The snake Snake variable is the snake that will be in the node; snake must be different from null or empty
+     * Pre: snake must be different from null or empty
      * Pos: The previous snake of the node is changed to the new one
-     * @param snake
+     * @param snake The snake Snake variable is the snake that will be in the node
      */
     public void setSnake(Snakes snake) {
         this.statusNode = true;
@@ -64,9 +64,9 @@ public class Node {
 
     /**
      * Method name: setLadders.
-     * Pre: The ladders Ladders variable is the ladder that will be in the node; ladders must be different from null or empty
+     * Pre: ladders must be different from null or empty
      * Pos: The previous ladder of the node is changed to the new one
-     * @param ladders
+     * @param ladders The ladders Ladders variable is the ladder that will be in the node
      */
     public void setLadders(Ladders ladders) {
         this.statusNode = true;
@@ -102,9 +102,9 @@ public class Node {
 
     /**
      * Method name: setTop.
-     * Pre: The top Node variable is the new node that will be in the top; top must be different from null or empty
+     * Pre: top must be different from null or empty
      * Pos: The previous top of the node is changed to the new one
-     * @param top
+     * @param top The top Node variable is the new node that will be in the top
      */
     public void setTop(Node top) {
         this.top = top;
@@ -121,9 +121,9 @@ public class Node {
 
     /**
      * Method name: setBottom.
-     * Pre: The bottom Node variable is the new node that will be in the bottom; bottom must be different from null or empty
+     * Pre: bottom must be different from null or empty
      * Pos: The previous bottom of the node is changed to the new one
-     * @param bottom
+     * @param bottom The bottom Node variable is the new node that will be in the bottom
      */
     public void setBottom(Node bottom) {
         this.bottom = bottom;
@@ -140,9 +140,9 @@ public class Node {
 
     /**
      * Method name: setLeft.
-     * Pre: The left Node variable is the new node that will be in the left; left must be different from null or empty
+     * Pre: left must be different from null or empty
      * Pos: The previous left of the node is changed to the new one
-     * @param left
+     * @param left The left Node variable is the new node that will be in the left
      */
     public void setLeft(Node left) {
         this.left = left;
@@ -159,9 +159,9 @@ public class Node {
 
     /**
      * Method name: setRight.
-     * Pre: The right Node variable is the new node that will be in the right; right must be different from null or empty
+     * Pre: right must be different from null or empty
      * Pos: The previous right of the node is changed to the new one
-     * @param right
+     * @param right The right Node variable is the new node that will be in the right
      */
     public void setRight(Node right) {
         this.right = right;
@@ -178,9 +178,9 @@ public class Node {
 
     /**
      * Method name: setId.
-     * Pre: The id int variable is the new identification that the node will have in the current game board; id must be different from null or empty
+     * Pre: id must be different from null or empty
      * Pos: The previous id of the node is changed to the new one
-     * @param id
+     * @param id The id int variable is the new identification that the node will have in the current game board
      */
     public void setId(int id) {
         this.id = id;
@@ -206,9 +206,9 @@ public class Node {
 
     /**
      * Method name: setStatusNode.
-     * Pre: The statusNode boolean variable is the new status that the node will have in the current game board; statusNode must be different from null or empty
+     * Pre: statusNode must be different from null or empty
      * Pos: The previous statusNode of the node is changed to the new one
-     * @param statusNode
+     * @param statusNode The statusNode boolean variable is the new status that the node will have in the current game board
      */
     public void setStatusNode(boolean statusNode) {
         this.statusNode = statusNode;
@@ -234,9 +234,9 @@ public class Node {
 
     /**
      * Method name: setVisible.
-     * Pre: The visible boolean variable is the new visible that the attributes of the game board (players, ladders, snakes, and the identification of the node) will have in the current game board; visible must be different from null or empty
+     * Pre: visible must be different from null or empty
      * Pos: The previous visible of each of the necessary attributes of the game board is changed to the new one
-     * @param visible
+     * @param visible The visible boolean variable is the new visible that the attributes of the game board (players, ladders, snakes, and the identification of the node) will have in the current game board
      */
     public void setVisible(Boolean visible) {
         this.visible = visible;
@@ -244,9 +244,9 @@ public class Node {
 
     /**
      * Method name: setPlayers.
-     * Pre: The p Player variable is the new player that the game will have in the current game board; p must be different from null or empty
+     * Pre: p must be different from null or empty
      * Pos: The previous p is changed to the new one
-     * @param p
+     * @param p The p Player variable is the new player that the game will have in the current game board
      */
     public void setPlayers(Player p) {
         this.players = p;

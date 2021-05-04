@@ -8,9 +8,9 @@ public class Ladders {
 
     /**
      * Method name: Ladders.
-     * Pre: The number int variable is the number of ladders that the current game board will have; number must be different from null or empty
+     * Pre: number must be different from null or empty
      * Pos: The number of ladders is created correctly
-     * @param number
+     * @param number The number int variable is the number of ladders that the current game board will have
      */
     public Ladders(int number) {
         this.number = number;
@@ -27,9 +27,9 @@ public class Ladders {
 
     /**
      * Method name: setNumber.
-     * Pre: The number int variable is the new number of ladders that the board will have; number must be different from null or empty
+     * Pre: number must be different from null or empty
      * Pos: The previous number of ladders is changed to the new one
-     * @param number
+     * @param number The number int variable is the new number of ladders that the board will have
      */
     public void setNumber(int number) {
         this.number = number;
@@ -46,9 +46,9 @@ public class Ladders {
 
     /**
      * Method name: setStart.
-     * Pre: The start node variable is the beginning of the ladder that it will have; start must be different from null or empty
+     * Pre: start must be different from null or empty
      * Pos: The previous start node of the ladder is changed to the new one
-     * @param start
+     * @param start The start node variable is the beginning of the ladder that it will have
      */
     public void setStart(Node start) {
         this.start = start;
@@ -65,9 +65,9 @@ public class Ladders {
 
     /**
      * Method name: setEnd.
-     * Pre: The end node variable is the end of the ladder that will have; end must be different from null or empty
+     * Pre: end must be different from null or empty
      * Pos: The previous end node of the ladder is changed to the new one
-     * @param end
+     * @param end The end node variable is the end of the ladder that will have
      */
     public void setEnd(Node end) {
         this.end = end;
