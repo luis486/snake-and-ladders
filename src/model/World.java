@@ -6,8 +6,8 @@ public class World {
 
     public final String PATH = "data/leaderboard.lmh";
     private Node firstNode;
-    private Player actual; // Jugador actual al momento
-    private Player one; // Lista enlazada de jugadores
+    private Player actual;
+    private Player one;
     private Player root;
     private String message = "";
     private int numRows;
@@ -20,9 +20,22 @@ public class World {
     private boolean finished;
 
     public World() {
-
     }
 
+    /**
+     * Method name: World.
+     * Pre: The n int variable is the number of rows that the game board will have; n must be different from null or empty
+     * Pre: The m int variable is the number of columns that the game board will have; m must be different from null or empty
+     * Pre: The as int variable is the number of snakes that the game board will have; as must be different from null or empty
+     * Pre: The al int variable is the number of ladders that the game board will have; al must be different from null or empty
+     * Pre: The ap int variable is the number of players that the game board will have; ap must be different from null or empty
+     * Pos: The current game is created successfully
+     * @param n
+     * @param m
+     * @param as
+     * @param al
+     * @param ap
+     */
     public World(int n, int m, int as, int al, int ap) {
         numRows = n;
         numCols = m;
@@ -38,6 +51,19 @@ public class World {
         generateLadders(al, 0, 1);
     }
 
+    /**
+     * Method name: World.
+     * Pre: The n int variable is the number of rows that the game board will have; n must be different from null or empty
+     * Pre: The m int variable is the number of columns that the game board will have; m must be different from null or empty
+     * Pre: The as int variable is the number of snakes that the game board will have; as must be different from null or empty
+     * Pre: The al int variable is the number of ladders that the game board will have; al must be different from null or empty
+     * Pre: The ap int variable is the number of players that the game board will have; ap must be different from null or empty
+     * Pos: The current game is created successfully
+     * @param n
+     * @param m
+     * @param as
+     * @param al
+     */
     public World(int n, int m, int as, int al) {
         numRows = n;
         numCols = m;
@@ -52,70 +78,159 @@ public class World {
         generateLadders(al, 0, 1);
     }
 
+    /**
+     * Method name: getActual.
+     * Pos: Returns the actual player of the game
+     * @return actual
+     */
     public Player getActual() {
         return this.actual;
     }
 
+    /**
+     * Method name: setActual.
+     * Pre: The actual Player variable is the new player who will occupy the current position in the current game; actual must be different from null or empty
+     * Pos: The previous player is changed to the new one
+     * @param actual
+     */
     public void setActual(Player actual) {
         this.actual = actual;
     }
 
+    /**
+     * Method name: getAmountSnakes.
+     * Pos: Returns the total number of snakes
+     * @return amountSnakes
+     */
     public int getAmountSnakes() {
         return this.amountSnakes;
     }
 
+    /**
+     * Method name: setAmountSnakes.
+     * Pre: The amountSnakes int variable is the new number of snakes that the board will have; amountSnakes must be different from null or empty
+     * Pos: The previous amount of snakes is changed to the new one
+     * @param amountSnakes
+     */
     public void setAmountSnakes(int amountSnakes) {
         this.amountSnakes = amountSnakes;
     }
 
+    /**
+     * Method name: getAmountLadders.
+     * Pos: Returns the total number of ladders
+     * @return amountLadders
+     */
     public int getAmountLadders() {
         return this.amountLadders;
     }
 
+    /**
+     * Method name: setAmountLadders.
+     * Pre: The amountLadders int variable is the new number of ladders that the board will have; amountLadders must be different from null or empty
+     * Pos: The previous amount of ladders is changed to the new one
+     * @param amountLadders
+     */
     public void setAmountLadders(int amountLadders) {
         this.amountLadders = amountLadders;
     }
 
+    /**
+     * Method name: getAmountPlayers.
+     * Pos: Returns the total number of players
+     * @return amountPlayers
+     */
     public int getAmountPlayers() {
         return this.amountPlayers;
     }
 
+    /**
+     * Method name: setAmountPlayers.
+     * Pre: The amountPlayers int variable is the new number of players that the board will have; amountPlayers must be different from null or empty
+     * Pos: The previous amount of players is changed to the new one
+     * @param amountPlayers
+     */
     public void setAmountPlayers(int amountPlayers) {
         this.amountPlayers = amountPlayers;
     }
 
+     /**
+     * Method name: getFinished.
+     * Pos: Returns the condition to finish the game
+     * @return finished
+     */
     public boolean getFinished() {
         return this.finished;
     }
 
+    /**
+     * Method name: setNumber.
+     * Pre: The finished boolean variable is the new condition to finish or not the current game board; finished must be different from null or empty
+     * Pos: The previous finished is changed to the new one
+     * @param finished
+     */
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
 
+    /**
+     * Method name: getVisible.
+     * Pos: Returns the visibility of the items that the square has
+     * @return visible
+     */
     public boolean getVisible() {
         return this.visible;
     }
 
+    /**
+     * Method name: setVisible.
+     * Pre: The visible boolean variable is the new condition to show or not the items that the square has of the current game board; visible must be different from null or empty
+     * Pos: The previous visible is changed to the new one
+     * @param visible
+     */
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
 
+    /**
+     * Method name: getMessage.
+     * Pos: Returns a message with the nickname of the players of previous games
+     * @return visible
+     */
     public String getMessage() {
         return this.message;
     }
 
+    /**
+     * Method name: setMessage.
+     * Pre: The message String variable is a new update message to show the new winners of the game; message must be different from null or empty
+     * Pos: The previous message is changed to the new one
+     * @param message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
     // -----------------------------------------PERSISTENCE----------------------------------------------------
 
+    /**
+     * Method name: saveData.
+     * Pos: Game winners are saved
+     * @throws java.io.IOException
+     * @throws java.lang.ClassNotFoundException
+     */
     public void saveData() throws IOException, ClassNotFoundException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH));
         oos.writeObject(root);
         oos.close();
     }
 
+    /**
+     * Method name: loadData.
+     * Pos: A table is loaded with the winners of previous games
+     * @throws java.io.IOException
+     * @throws java.lang.ClassNotFoundException
+     */
     public void loadData() throws IOException, ClassNotFoundException {
         File file = new File(PATH);
         if (file.length() > 0) {
@@ -127,13 +242,26 @@ public class World {
 
     // -------------------------------CREATE-AND-PRINT-MATRIX-------------------------------------------------
 
+    /**
+     * Method name: createWorld.
+     * Pos: The first node is created to start forming the matrix of linked lists
+     */
     private void createWorld() {
         firstNode = new Node(0, 0, 0);
         createRow(0, 0, firstNode);
     }
 
-    private void createRow(int i, int j, Node firstRow) { // Llama a create col para que la columna sobre ese nuevo
-                                                          // metodo
+    /**
+     * Method name: createWorld.
+     * Pre: The i int variable it will create the table row; i must be different from null or empty
+     * Pre: The j int variable it will create the complete column of the row; j must be different from null or empty
+     * Pre: The firstRow Node variable it will be made a double link of the top and bottom; firstRow must be different from null or empty
+     * Pos: The row with its respective column and its linked is successfully created
+     * @param i
+     * @param j
+     * @param firstRow
+     */
+    private void createRow(int i, int j, Node firstRow) {
         createCol(i, j + 1, firstRow, firstRow.getTop());
         if (i + 1 < numRows) {
             Node firstDownRow = new Node(i + 1, j, 0);
@@ -143,7 +271,19 @@ public class World {
         }
     }
 
-    private void createCol(int i, int j, Node left, Node rowPrev) { // Crear a lo ancho
+    /**
+     * Method name: createWorld.
+     * Pre: The i int variable it will identify the table row; i must be different from null or empty
+     * Pre: The j int variable it will create the complete column of the row; j must be different from null or empty
+     * Pre: The left Node variable is in charge of making the respective links of the current square; left must be different from null or empty
+     * Pre: The rowPrev Node variable it will be made a double link of the right and left; rowPrev must be different from null or empty
+     * Pos: The column with its respective row and its linked is successfully created
+     * @param i
+     * @param j
+     * @param left
+     * @param rowPrev
+     */
+    private void createCol(int i, int j, Node left, Node rowPrev) {
         if (j < numCols) {
             Node current = new Node(i, j, 0);
             current.setLeft(left);
@@ -158,12 +298,25 @@ public class World {
         }
     }
 
+    /**
+     * Method name: toString.
+     * Pos: Returns a message with the visualization of the matrix
+     * @return msg
+     */
+    @Override
     public String toString() {
         String msg = "";
         msg = printRow(firstNode);
         return msg;
     }
 
+    /**
+     * Method name: printRow.
+     * Pre: The firstRow Node variable bring the location of the row node to be displayed in the matrix; firstRow must be different from null or empty
+     * Pos: Returns a message with the visualization of the row
+     * @param firstRow
+     * @return msg
+     */
     public String printRow(Node firstRow) {
         String msg = "";
         if (firstRow != null) {
@@ -173,6 +326,13 @@ public class World {
         return msg;
     }
 
+    /**
+     * Method name: printRow.
+     * Pre: The current Node variable bring the location of the column node to be displayed in the matrix; current must be different from null or empty
+     * Pos: Returns a message with the visualization of the row
+     * @param current
+     * @return msg
+     */
     public String printCol(Node current) {
         String msg = "";
         if (current != null) {
@@ -188,10 +348,22 @@ public class World {
         return msg;
     }
 
+    /**
+     * Method name: matrixEnum.
+     * Pre: The firstNode Node variable bring the location of the node to be displayed enumerated in the matrix; firstNode must be different from null or empty
+     * Pos: Performs node enumeration
+     * @param firstNode
+     */
     public void matrixEnum(Node firstNode) {
         matrixFirstRow(firstNode);
     }
 
+    /**
+     * Method name: matrixFirstRow.
+     * Pre: The firstRow Node variable the identifier 1 is given to make the count of the square
+     * Pos: The square is left with an identifier
+     * @param firstRow
+     */
     public void matrixFirstRow(Node firstRow) {
         if (firstRow.getBottom() != null) {
             matrixFirstRow(firstRow.getBottom());
@@ -201,6 +373,12 @@ public class World {
         }
     }
 
+    /**
+     * Method name: matrixRightRow.
+     * Pre: The rightRow Node variable is increased to the current identifier that the node has; rightRow must be different from null or empty
+     * Pos: The square is left with an identifier
+     * @param rightRow
+     */
     public void matrixRightRow(Node rightRow) {
         if (rightRow.getRight() != null) {
             rightRow.getRight().setId(rightRow.getId() + 1);
@@ -211,6 +389,12 @@ public class World {
         }
     }
 
+    /**
+     * Method name: matrixLeftRow.
+     * Pre: The leftRow Node variable is increased to the current identifier that the node has; leftRow must be different from null or empty
+     * Pos: The square is left with an identifier
+     * @param leftRow
+     */
     public void matrixLeftRow(Node leftRow) {
         if (leftRow.getLeft() != null) {
             leftRow.getLeft().setId(leftRow.getId() + 1);
@@ -223,6 +407,16 @@ public class World {
 
     // ----------------------------------------------SNAKES-------------------------------------------------------
 
+    /**
+     * Method name: generateSnakes.
+     * Pre: The snakes int variable is the number of snakes that the game board will have; snakes must be different from null or empty
+     * Pre: The control int variable it is a counter that controls the method to create the snakes one by one; control must be different from null or empty
+     * Pre: The snakeName char variable It is the identification(name) that the snake will have on the game board; snakeName must be different from null or empty
+     * Pos: The snake is created correctly in the game board
+     * @param snakes
+     * @param control
+     * @param snakeName
+     */
     public void generateSnakes(int snakes, int control, char snakeName) {
 
         int idHead = (int) (Math.random() * (sizeMatrix) + 1);
@@ -251,6 +445,15 @@ public class World {
         }
     }
 
+    /**
+     * Method name: validateSnakes.
+     * Pre: The current int variable is the node that will be used to know if there is a snake located; current must be different from null or empty
+     * Pre: The id int variable is the identifier of a square to be sent; id must be different from null or empty
+     * Pos: If the identifier matches the node that has the snake, a message will be sent to the player, if not, the node is returned
+     * @param current
+     * @param id
+     * @return Node
+     */
     public Node validateSnakes(Node current, int id) {
         if (current.getSnake().getStart().getId() == id) {
             System.out.println("El jugador " + actual.getSymbol()
@@ -262,6 +465,17 @@ public class World {
         }
     }
 
+    /**
+     * Method name: searchNode.
+     * Pre: The id int variable is the identification of the node of the game board; id must be different from null or empty
+     * Pre: The current Node variable is the node that will be used to know where it is located on the game board; current must be different from null or empty
+     * Pre: The firstRow Node variable is the node that will be used to know in which position the node is located on the game board (up, down, right or left); firstRow must be different from null or empty
+     * Pos: The node is successfully located
+     * @param id
+     * @param current
+     * @param firstRow
+     * @return Node
+     */
     public Node searchNode(int id, Node current, Node firstRow) {
         if (current.getId() == id && current.getStatusNode() == false) {
             return current;
@@ -276,6 +490,13 @@ public class World {
 
     // ----------------------------------------VALIDATION-SNAKE-AND-LADDERS-----------------------------------
 
+    /**
+     * Method name: validateLadders.
+     * Pre: The after Node variable is the node that will be used to validate if there is a ladder or snake located; after must be different from null or empty
+     * Pos: The node is returned with the validation
+     * @param after
+     * @return Node
+     */
     public Node validateSnakesOrLadders(Node after) {
         if (after.getSnake() != null) {
             return validateSnakes(after, after.getId());
@@ -288,6 +509,16 @@ public class World {
 
     // -----------------------------------------------LADDERS-----------------------------------------------------
 
+    /**
+     * Method name: generateLadders.
+     * Pre: The ladders int variable is the number of ladders that the game board will have; ladders must be different from null or empty
+     * Pre: The control int variable it is a counter that controls the method to create the ladders one by one; control must be different from null or empty
+     * Pre: The ladderName int variable It is the identification(number) that the ladder will have on the game board; ladderName must be different from null or empty
+     * Pos: The ladder is created correctly in the game board
+     * @param ladders
+     * @param control
+     * @param ladderName
+     */
     public void generateLadders(int ladders, int control, int ladderName) {
 
         int idHead = (int) (Math.random() * (sizeMatrix) + 1);
@@ -315,6 +546,15 @@ public class World {
         }
     }
 
+    /**
+     * Method name: validateLadders.
+     * Pre: The current int variable is the node that will be used to know if there is a ladder located; current must be different from null or empty
+     * Pre: The id int variable is the identifier of a square to be sent; id must be different from null or empty
+     * Pos: If the identifier matches the node that has the ladder, a message will be sent to the player, if not, the node is returned
+     * @param current
+     * @param id
+     * @return Node
+     */
     public Node validateLadders(Node current, int id) {
         if (current.getLadders().getEnd().getId() == id) {
             System.out.println(
@@ -328,8 +568,13 @@ public class World {
 
     // ---------------------------------------------------DICE---------------------------------------------------
 
+    /**
+     * Method name: generateDice.
+     * Pos: The number of the dice that the player will have to advance through the game board is generated, the player will be notified with a message
+     * @return msg
+     */
     public String generateDice() {
-        Player pla = changeActualPlayer(actual);
+        Player player = changeActualPlayer(actual);
         String msg = "";
         int valorEntero = (int) Math.floor(Math.random() * (6) + 1);
         Node before = searchNodePosition(actual.getPosition(), firstNode, firstNode);
@@ -351,18 +596,30 @@ public class World {
         }
 
         msg = "El jugador " + actual.getSymbol() + " ha lanzado el dado y ha obtenido: " + valorEntero;
-        actual = pla;
+        actual = player;
 
         return msg;
     }
 
     // -----------------------------------------------------PLAYERS---------------------------------------------------
 
+    /**
+     * Method name: addPlayer.
+     * Pre: The letter char variable is the identification that the player will have in the form of a symbol to play on the board; letter must be different from null or empty
+     * Pos: The player is successfully added to the game
+     * @param letter
+     */
     public void addPlayer(char letter) {
         Player p = new Player(letter, sizeMatrix);
         addPlayer(p);
     }
 
+    /**
+     * Method name: addPlayer.
+     * Pre: The player Player variable is the player that is sent by parameter to identify if it is the first player to be added or is a player after the first
+     * Pos: The player is successfully added
+     * @param player
+     */
     public void addPlayer(Player player) {
         if (one == null) {
             one = player;
@@ -373,6 +630,14 @@ public class World {
         }
     }
 
+    /**
+     * Method name: addPlayer.
+     * Pre: The current Player variable is the current player that is sent by parameter to identify if there is any next player
+     * Pre: The newPlayer Player variable is the new player who will take the next position; newPlayer must be different from null or empty
+     * Pos: The player is successfully added
+     * @param current
+     * @param newPlayer
+     */
     private void addPlayer(Player current, Player newPlayer) {
         if (current.getPostPlayer() == null) {
             current.setPostPlayer(newPlayer);
@@ -382,6 +647,17 @@ public class World {
         }
     }
 
+    /**
+     * Method name: searchNodePosition.
+     * Pre: The id int variable is the identification of the node of the game board; id must be different from null or empty
+     * Pre: The current Node variable is the node that will be used to know where it is located (right or left) on the game board; current must be different from null or empty
+     * Pre: The firstRow Node variable is the node that will be used to know in which position the node is located on the game board (up or down); firstRow must be different from null or empty
+     * Pos: The node position is successfully located
+     * @param id
+     * @param current
+     * @param firstRow
+     * @return Node
+     */
     public Node searchNodePosition(int id, Node current, Node firstRow) {
         if (current.getId() == id) {
             return current;
@@ -394,6 +670,16 @@ public class World {
         }
     }
 
+    /**
+     * Method name: setPlayerInNode.
+     * Pre: The player Player variable is the player who will be placed in the game square
+     * Pre: The current Node variable is the node where the player will be located; current must be different from null or empty
+     * Pre: The firstRow Node variable is the node where the player will be located; firstRow must be different from null or empty
+     * Pos: The node position is successfully located
+     * @param player
+     * @param current
+     * @param firstRow
+     */
     public void setPlayerInNode(Player player, Node current, Node firstRow) {
         Node node = searchNodePosition(player.getPosition(), firstNode, firstNode);
         if (node.getPlayers() == null) {
@@ -403,6 +689,14 @@ public class World {
         }
     }
 
+    /**
+     * Method name: setInBox.
+     * Pre: The player Player variable is the player who will be placed in the game square
+     * Pre: The firstPlayer Player variable is the node where the player will be located; current must be different from null or empty
+     * Pos: The player is successfully placed in the corresponding square
+     * @param player
+     * @param firstPlayer
+     */
     public void setInBox(Player player, Player firstPlayer) {
         if (firstPlayer.getPostPlayerInNode() != null) {
             setInBox(player, firstPlayer.getPostPlayerInNode());
@@ -411,6 +705,12 @@ public class World {
         }
     }
 
+    /**
+     * Method name: setInBox.
+     * Pre: The before Node variable is the node that will be used to position the player before the player who rolled the dice and advanced on the board; current must be different from null or empty
+     * Pos: The before player is successfully placed in the corresponding square
+     * @param before
+     */
     public void setNodeBefore(Node before) {
         if (actual.getPostPlayerInNode() != null) {
             before.setPlayers(actual.getPostPlayerInNode());
@@ -419,9 +719,16 @@ public class World {
         }
     }
 
-    public Player changeActualPlayer(Player p) {
-        if (p.getPostPlayer() != null) {
-            return p.getPostPlayer();
+    /**
+     * Method name: changeActualPlayer.
+     * Pre: The player Player variable is the player who is sent by parameter to change the before player for the new one on the game board; player must be different from null or empty
+     * Pos: The player is successfully exchanged for the new one
+     * @param player
+     * @return player
+     */
+    public Player changeActualPlayer(Player player) {
+        if (player.getPostPlayer() != null) {
+            return player.getPostPlayer();
         } else {
             return one;
         }
@@ -429,6 +736,14 @@ public class World {
 
     // --------------------------------------------------BINARY-SEARCH-TREE---------------------------------------------
 
+    /**
+     * Method name: addWinner.
+     * Pre: The player Player variable it is the player who won the current game on the board, if it is the first winner of the program, it will be the first to go in root, otherwise a verification will be made to know where the player will be
+     * Pos: The winner is successfully added
+     * @param player
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.io.IOException
+     */
     public void addWinner(Player player) throws ClassNotFoundException, IOException {
         if (root == null) {
             root = player;
@@ -439,6 +754,13 @@ public class World {
         loadData();
     }
 
+    /**
+     * Method name: addWinner.
+     * Pre: The current Player variable is the current winner who is in the program, it is compared with the winner of the current game and their scores are compared to know whether or not the score of the current player who won the game or the previous one is higher
+     * Pos: The winner is successfully added
+     * @param current
+     * @param newWinner
+     */
     private void addWinner(Player current, Player newWinner) {
         if (newWinner.getScore() >= current.getScore()) {
             if (current.getLeft() == null) {
@@ -455,6 +777,11 @@ public class World {
         }
     }
 
+    /**
+     * Method name: printRow.
+     * Pre: To show the winners there must be at least one winner; root must be different from null or empty
+     * Pos: A message is displayed with the current winners, if there is not a winner, an error message is sent
+     */
     public void printWinners() {
         if (root != null) {
             printWinners(root);
@@ -463,6 +790,12 @@ public class World {
         }
     }
 
+    /**
+     * Method name: printWinners.
+     * Pre: The player Player variable is the winning player that will be displayed in the message; player must be different from null or empty
+     * Pos: A message is displayed with the current winners
+     * @param player
+     */
     private void printWinners(Player player) {
         if (player == null) {
             return;
@@ -472,5 +805,4 @@ public class World {
             printWinners(player.getRight());
         }
     }
-
 }
