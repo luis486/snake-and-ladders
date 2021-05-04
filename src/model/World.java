@@ -787,7 +787,7 @@ public class World {
         if (root != null) {
             printWinners(root);
         } else {
-            message = "No hay jugadores aún!";
+            message = "¡No hay jugadores aún!";
         }
     }
 
