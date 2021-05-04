@@ -43,7 +43,7 @@ Visual studio code and a lot of disposition!🙌🤩🥳.
 
 ### [Link to the requirements](https://github.com/luis486/snake-and-ladders/blob/master/docs/Requirements%20TI2.pdf "PDF")
 
-### [Link to the diagram class](https://github.com/luis486/snake-and-ladders/blob/master/docs/Class%20Diagram%20Snake%20and%20Ladders.jpg "JPG")
+### [Link to the diagram class](https://github.com/luis486/snake-and-ladders/blob/master/docs/Class%20Diagram%20Snake%20and%20Ladders.pdf "PDF")
 
 ## Acknowledgments 🎁🥳
 
