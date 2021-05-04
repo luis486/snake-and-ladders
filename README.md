@@ -1,43 +1,50 @@
 # Snake and Ladders
 
-Este proyecto está dirigido a aquellas personas que quieran pasar un buen rato jugando snake and ladders! Ven, disfruta, comparte y califica.
+Together we have created the best snake and ladder game to spend some time playing with friends🐍🕹.
 
-## Comenzando 🚀
+## Starting 🚀
 
-A continuación podrás ver un poco sobre nuestro trabajo y además la gratitud a todos aquellas personas que colaboraron en la realización de este proyecto, salud y vida para todos!
+Below you can see a little about our work and also gratitude to all those people who collaborated in the realization of this project. Thanks to the people who collaborated with us we have created a wonderful game 🤝👫.
 
-### Pre-requisitos 📋
+## ¿How the game was made 👀🤔?
 
-Debes tener la actual versión de java para ejecutar tu codigo o para modificarlo, un buen editor de código a tu gusto, y ganas de jugar! 
+The game was created using the java development environment and using mainly linked lists and recursion, a small method was also made to save all the players who won in the game in an lmh file, that is, each time you run the program you can see the current winners of different games🏆.
 
-### ¿Cómo puedo jugar👾🎮?
+### Pre-requirements 📋
 
-Brevemente te explicaré, el juego consiste en una pequeña simulación del juego de mesa "Serpientes y escaleras" de las cuales dispondrás un símbolo para jugar y un dado para avanzar tu "ficha" lanza tu dado, si caes en una escalera, puedes subir a una parte correspondiente, cae en una serpiente y retrocederás de la misma manera, puedes simular el juego o cortar el juego y volver al menu, ¿qué esperas para jugar?
+🖥🖱You must have java version 8.0 or higher to successfully run the game or to modify it.
 
-## Despliegue 📦
+🖥🖱The game is created to be used on Windows or MacOs.
 
-Inserte frase motivacional para sacar fuerzas en este proyecto!
+🖥🖱A code editor with which you feel familiar in the Java environment.
 
-## Construido con 🛠️👨‍💻👩‍💻
+### Program installation 👨‍💻👩‍💻🔐
 
-Visual studio code y mucha disposición!
+To download the project it is recommended to have previously installed git to make downloading easier. The first thing you will do is go to the green button where it says (CLONE) to have the github link and install it through git, it will give you a folder with the complete program, its requirements, documentation, source code, ect.
 
-## Autores y contribuidores ✒️👥
+### ¿How can I play?👾🎮?
 
-* **Luis Murcia** - *Autor* - [luis486](https://github.com/luis486)
-* **Diana Olano** - *Autor* - [DianaOlanoU](https://github.com/DianaOlanoU)
-* **Paula Trujillo** - *Contribuidor Menor* - [paulatrujillo27](https://github.com/paulatrujillo27)
-* **Jhorman Mera** - *Contribuidor Menor* - [JhormanMera](https://github.com/JhormanMera)
-* **Juan Reyes** - *Autor de la matriz implementada* - [seyerman](https://github.com/seyerman)
-* **Alejandro Varela** - *Ayudas menores*
+Briefly I will explain to you, the game consists of a small simulation of the board game "Snakes and ladders" of which you will have a symbol to play and a dice to advance your "token" throw your dice, if you fall on a ladder, you can go up to a corresponding part, fall into a snake and you will go back the same way, you can simulate the game or cut the game and go back to the menu.
 
-## Expresiones de Gratitud 🎁🥳
+## Built with 🛠️👨‍💻👩‍💻
 
-* Comenta a otros sobre este proyecto 📢🗣
-* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
-* Da las gracias públicamente 🤓🤳.
+Visual studio code and a lot of disposition!🙌🤩🥳.
+
+## Authors and contributors ✒️👥
+
+* **Luis Murcia** - *Author* - [luis486](https://github.com/luis486)
+* **Diana Olano** - *Author* - [DianaOlanoU](https://github.com/DianaOlanoU)
+* **Paula Trujillo** - *Minor Contributor* - [paulatrujillo27](https://github.com/paulatrujillo27)
+* **Jhorman Mera** - *Minor Contributor* - [JhormanMera](https://github.com/JhormanMera)
+* **Juan Reyes** - *Author of the implemented matrix* - [seyerman](https://github.com/seyerman)
+* **Alejandro Varela** - *Minor help*
+
+## Acknowledgments 🎁🥳
+
+* Tell others about this project 📢🗣.
+* Give thanks publicly 🤓🤳.
 
 
 
 ---
-⌨️ con ❤️ por **Luis Murcia** y **Diana Olano** 😊
+⌨️ With ❤️ by **Luis Murcia**👨‍💻 y **Diana Olano**👩‍💻
