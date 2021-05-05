@@ -24,7 +24,7 @@ To download the project it is recommended to have previously installed git to ma
 
 ### ¿How can I play?👾🎮?
 
-Briefly I will explain to you, the game consists of a small simulation of the board game "Snakes and ladders" of which you will have a symbol to play and a dice to advance your "token" throw your dice, if you fall on a ladder, you can go up to a corresponding part, fall into a snake and you will go back the same way, you can simulate the game or cut the game and go back to the menu.
+Briefly I will explain to you, the game consists of a small simulation of the board game "Snakes and ladders" of which you will have a symbol to play and a dice to advance your "token" throw your dice, if you fall on a ladder, you can go up to a corresponding part, fall into a snake and you will go back the same way, you can simulate the game or cut the game and go back to the menu 🐍🕹.
 
 ## Built with 🛠️👨‍💻👩‍💻
 
