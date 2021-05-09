@@ -154,7 +154,7 @@ public class World {
         this.amountPlayers = amountPlayers;
     }
 
-     /**
+    /**
      * Method name: getFinished.
      * Pos: Returns the condition to finish the game
      * @return finished
@@ -348,7 +348,7 @@ public class World {
         return msg;
     }
 
-    /**
+     /**
      * Method name: matrixEnum.
      * Pre: firstNode must be different from null or empty
      * Pos: Performs node enumeration
@@ -407,7 +407,7 @@ public class World {
 
     // ----------------------------------------------SNAKES-------------------------------------------------------
 
-    /**
+     /**
      * Method name: generateSnakes.
      * Pre: snakes must be different from null or empty
      * Pre: control must be different from null or empty
@@ -509,7 +509,7 @@ public class World {
 
     // -----------------------------------------------LADDERS-----------------------------------------------------
 
-    /**
+   /**
      * Method name: generateLadders.
      * Pre: ladders must be different from null or empty
      * Pre: control must be different from null or empty
@@ -592,6 +592,7 @@ public class World {
         }
 
         if (actual.getIsWinner() == true) {
+            player = actual;
             setFinished(true);
         }
 
@@ -720,8 +721,7 @@ public class World {
     }
 
     /**
-     * Method name: changeActualPlayer.
-     * Pre: player must be different from null or empty
+     * Method name: changeActualPlayer. Pre: player must be different from null or empty 
      * Pos: The player is successfully exchanged for the new one
      * @param player The player Player variable is the player who is sent by parameter to change the before player for the new one on the game board
      * @return player
@@ -737,8 +737,8 @@ public class World {
     // --------------------------------------------------BINARY-SEARCH-TREE---------------------------------------------
 
     /**
-     * Method name: addWinner.
-     * Pre: The player Player variable it is the player who won the current game on the board, if it is the first winner of the program, it will be the first to go in root, otherwise a verification will be made to know where the player will be
+     * Method name: addWinner. 
+     * Pre: The player Player variable it is the player who won the current game on the board, if it is the first winner of the program, it will be the first to go in root, otherwise a verification will be made to know where the player will be 
      * Pos: The winner is successfully added
      * @param player possible game winner
      * @throws java.lang.ClassNotFoundException It will jump error if it does not find the class
@@ -755,15 +755,14 @@ public class World {
     }
 
     /**
-     * Method name: addWinner.
-     * Pre: The current Player variable is the current winner who is in the program, it is compared with the winner of the current game and their scores are compared to know whether or not the score of the current player who won the game or the previous one is higher
-     * Pre: The newWinner Player variable is the winner of the current game and will be compared with the last current winner of the program to know if his score is higher or not and place where it corresponds
-     * Pos: The winner is successfully added
+     * Method name: addWinner. 
+     * Pre: The current Player variable is the current winner who is in the program, it is compared with the winner of the current game and their scores are compared to know whether or not the score of the current player who won the game or the previous one is higher 
+     * Pre: The newWinner Player variable is the winner of the current game and will be compared with the last current winner of the program to know if his score is higher or not and place where it corresponds Pos: The winner is successfully added
      * @param current last player that the program has registered
      * @param newWinner possible game winner
      */
     private void addWinner(Player current, Player newWinner) {
-        if (newWinner.getScore() >= current.getScore()) {
+        if (newWinner.getScore() <= current.getScore()) {
             if (current.getLeft() == null) {
                 current.setLeft(newWinner);
             } else {
@@ -779,9 +778,7 @@ public class World {
     }
 
     /**
-     * Method name: printWinners.
-     * Pre: To show the winners there must be at least one winner; root must be different from null or empty
-     * Pos: A message is displayed with the current winners, if there is not a winner, an error message is sent
+     * Method name: printWinners. Pre: To show the winners there must be at least one winner; root must be different from null or empty Pos: A message is displayed with the current winners, if there is not a winner, an error message is sent
      */
     public void printWinners() {
         if (root != null) {
@@ -792,8 +789,7 @@ public class World {
     }
 
     /**
-     * Method name: printWinners.
-     * Pre: player must be different from null or empty
+     * Method name: printWinners. Pre: player must be different from null or empty
      * Pos: A message is displayed with the current winners
      * @param player The player Player variable is the winning player that will be displayed in the message
      */
@@ -802,7 +798,7 @@ public class World {
             return;
         } else {
             printWinners(player.getLeft());
-            message += "      " + player.getNickname() + "            " + player.toString() + "\n";
+            message += "      " + player.getNickname() +"                 " + player.getSymbol() + "                 " + player.toString() + "\n";
             printWinners(player.getRight());
         }
     }

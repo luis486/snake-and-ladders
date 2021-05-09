@@ -18,8 +18,11 @@ public class Menu {
      * Pos: the desired option by the user is successfully chosen.
      */
     public void showMenu() {
-        System.out.println("\033[035m___________________________________________BIENVENIDO AL MENÚ DE SERPIENTES Y ESCALERAS___________________________________________\n"+"\033[0m");
-        System.out.print("\n¿Qué quieres hacer el día de hoy?" + "\n" + "\n(1) Quiero jugar Snake and Ladders!"+ "\n(2) Deseo ver el tablero de posiciones" + "\n(3) Deseo salir" + "\nEscriba aqui: ");
+        System.out.println(
+                "\033[035m___________________________________________BIENVENIDO AL MENÚ DE SERPIENTES Y ESCALERAS___________________________________________\n"
+                        + "\033[0m");
+        System.out.print("\n¿Qué quieres hacer el día de hoy?" + "\n" + "\n(1) Quiero jugar Snake and Ladders!"
+                + "\n(2) Deseo ver el tablero de posiciones" + "\n(3) Deseo salir" + "\nEscriba aqui: ");
     }
 
     /**
@@ -28,19 +31,24 @@ public class Menu {
      * Pos: The desired option by the user is successfully chosen.
      */
     public void createGame() {
-        System.out.print("\n¿Cual opción escojeras?" + "\n" + "\n(1) Quiero escoger los símbolos jugadores"+ "\n(2) Prefiero que se escojan aleatoriamente" + "\nEscriba aqui: ");
+        System.out.print("\n¿Cual opción escojeras?" + "\n" + "\n(1) Quiero escoger los símbolos jugadores"
+                + "\n(2) Prefiero que se escojan aleatoriamente" + "\nEscriba aqui: ");
         int option = sc.nextInt();
         sc.nextLine();
         switch (option) {
             case 1:
                 System.out.print("\n");
-                System.out.print("\033[035m___________________________________________JUGADORES MANUALES___________________________________________\n"+"\033[0m");
+                System.out.print(
+                        "\033[035m___________________________________________JUGADORES MANUALES___________________________________________\n"
+                                + "\033[0m");
                 chooseManually();
                 System.out.print("\n");
                 break;
             case 2:
                 System.out.print("\n");
-                System.out.print("\033[035m___________________________________________JUGADORES ALEATORIOS___________________________________________\n"+"\033[0m");
+                System.out.print(
+                        "\033[035m___________________________________________JUGADORES ALEATORIOS___________________________________________\n"
+                                + "\033[0m");
                 generateAutomatic();
                 System.out.print("\n");
                 break;
@@ -81,7 +89,7 @@ public class Menu {
         return option;
     }
 
-    /**
+     /**
      *Method name: startProgram.
      * Pre: Calls the showMenu method and reads the option that the user entered by calling the readOption method and successfully stores it in an int variable
      * Pos: Depending on the option that the user entered, the method corresponding to the number is called or an error message is thrown if the option is not in the menu
@@ -91,7 +99,9 @@ public class Menu {
         int option = readOption();
         if (option == 3) {
             System.out.print("\n");
-            System.out.print("\033[035m___________________________________________APLICACION CERRADA___________________________________________\n"+"\033[0m");
+            System.out.print(
+                    "\033[035m___________________________________________APLICACION CERRADA___________________________________________\n"
+                            + "\033[0m");
             System.out.print("\n");
         } else {
             doOperation(option);
@@ -124,11 +134,13 @@ public class Menu {
         int m = Integer.parseInt(parts[1]);
 
         if (snakes > (n * m) / 5 || ladders > (n * m) / 5) {
-            System.err.println("La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
+            System.err.println(
+                    "La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
             chooseManually();
         } else {
             System.out.println("\n");
-            System.out.println("*********************TABLERO GENERADO POR LOS PARAMETROS ANTERIORMENTE PEDIDOS*********************");
+            System.out.println(
+                    "*********************TABLERO GENERADO POR LOS PARAMETROS ANTERIORMENTE PEDIDOS*********************");
             createWorldManually(parts);
         }
         assignManually(parts[4], 0);
@@ -137,7 +149,7 @@ public class Menu {
     }
 
     /**
-     *Method name: assignManually.
+     * Method name: assignManually.
      * Pre: The participants must be added in an array of Strings and the counter must be started at 0 before passing to the assignManually method as a parameters; parameters and count must be different from null or empty
      * Pos: Symbols are successfully assigned to players
      * @param parameters array where the players are
@@ -151,13 +163,14 @@ public class Menu {
     }
 
     /**
-     *Method name: createWorldManually.
+     * Method name: createWorldManually.
      * Pre: Each parameter requested at the beginning of the chooseManually method is stored in a Strings position of the parameters array except the participants; parameters must be different from null or empty
      * Pos: The current game match is successfully created
      * @param parameters is located the parameters that were requested to the user at startup
      */
     public void createWorldManually(String[] parameters) {
-        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
+        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
+                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
 
         try {
             world.loadData();
@@ -199,11 +212,13 @@ public class Menu {
         }
 
         if (snakes > (n * m) / 5 || ladders > (n * m) / 5) {
-            System.err.println("La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
+            System.err.println(
+                    "La cantidad de serpientes o escaleras no pueden sobrepasar el 40% de la cantidad de casillas del juego");
             generateAutomatic();
         } else {
             System.out.println("\n");
-            System.out.println("*********************TABLERO GENERADO POR LOS PARAMETROS ANTERIORMENTE PEDIDOS*********************");
+            System.out.println(
+                    "*********************TABLERO GENERADO POR LOS PARAMETROS ANTERIORMENTE PEDIDOS*********************");
             createWorldAutomatic(parts);
         }
         assignAutomatic(Integer.parseInt(parts[4]), 0);
@@ -212,7 +227,7 @@ public class Menu {
     }
 
     /**
-     *Method name: assignAutomatic.
+     * Method name: assignAutomatic.
      * Pre: The amount participants must be added in an int variable and the counter must be started at 0 before passing to the assignAutomatic method as a parameters; amount and count must be different from null or empty
      * Pos: Symbols are successfully assigned to players
      * @param amount maximum number of participants that the game will have
@@ -273,7 +288,8 @@ public class Menu {
      * @param parameters is located the parameters that were requested to the user at startup
      */
     public void createWorldAutomatic(String[] parameters) {
-        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
+        world = new World(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]),
+                Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]), Integer.parseInt(parameters[4]));
         try {
             world.loadData();
         } catch (ClassNotFoundException e) {
@@ -315,7 +331,7 @@ public class Menu {
      */
     public void initializeGame(boolean render) {
         if (render == false) {
-            System.out.println("\033[036mPor favor ingrese un salto de línea (enter) para continuar"+"\033[0m");
+            System.out.println("\033[036mPor favor ingrese un salto de línea (enter) para continuar" + "\033[0m");
             String jump = sc.nextLine();
             if (jump.equals("")) {
                 System.out.println(world.generateDice());
@@ -324,7 +340,8 @@ public class Menu {
                 initializeGame(world.getFinished());
             } else if (jump.equalsIgnoreCase("simul")) {
                 System.out.println("\n");
-                System.out.println("*********************USTED ESTA EN UNA SIMULACION DEL JUEGO ACTUAL*********************");
+                System.out.println(
+                        "*********************USTED ESTA EN UNA SIMULACION DEL JUEGO ACTUAL*********************");
                 System.out.println("\n");
                 gameSimulation();
             } else if (jump.equalsIgnoreCase("menu")) {
@@ -353,7 +370,8 @@ public class Menu {
      * Pos: A message is displayed with the winner of the current game
      */
     public void showWinner() {
-        System.out.println("\033[032m¡EL JUGADOR " + world.getActual().getSymbol() + " HA GANADO CON UN TOTAL DE "+ world.getActual().getMoves() + " MOVIMIENTOS!"+"\033[0m");
+        System.out.println("\033[032m¡EL JUGADOR " + world.getActual().getSymbol() + " HA GANADO CON UN TOTAL DE "
+                + world.getActual().getMoves() + " MOVIMIENTOS!" + "\033[0m");
         calculateWinner();
     }
 
@@ -392,8 +410,9 @@ public class Menu {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-             System.out.println("\033[032mGanador guardado exitosamente\n"+"\033[0m");
-            System.out.println("*********************USTED PODRÁ VER SU PUNTAJE EN LA OPCIÓN (2) DEL MENÚ DE INICIO*********************");
+            System.out.println("\033[032mGanador guardado exitosamente\n" + "\033[0m");
+            System.out.println(
+                    "*********************USTED PODRÁ VER SU PUNTAJE EN LA OPCIÓN (2) DEL MENÚ DE INICIO*********************");
         }
     }
 
@@ -411,9 +430,11 @@ public class Menu {
             e.printStackTrace();
         }
         System.out.print("\n");
-        System.out.print("\033[035m___________________________________________PUNTAJES DE JUGADORES___________________________________________\n"+"\033[0m");
+        System.out.print(
+                "\033[035m___________________________________________PUNTAJES DE JUGADORES___________________________________________\n"
+                        + "\033[0m");
         System.out.print("\n");
-        System.out.println("Nombre del jugador " + " Puntaje del jugador");
+        System.out.println("\033[034mNickname del jugador "+" Simbolo del jugador "+" Puntaje del jugador"+"\033[0m");
         w.printWinners();
         System.out.println(w.getMessage());
         w.setMessage("");
